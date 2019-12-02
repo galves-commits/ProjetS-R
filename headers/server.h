@@ -1,22 +1,36 @@
-struct temps
+typedef struct temps
 {
     int heure;
     int minute;
-};
+}Temps;
 
-struct train
+typedef struct train
 {
     int numero;
     char *villeDepart;
     char *villeArrivee;
-    struct temps heureDep;
-    struct temps heureArr;
+    Temps heureDep;
+    Temps heureArr;
     int prix;
     char *reduc;
-};
+}Train;
+
+typedef struct cellule{
+    Train leTrain;
+    struct cellule* suivant;
+}Cellule;
+typedef Cellule * PCellule;
+//inserTete(&(dernier->suivant), train)
+
+void inserTete(Cellule ** tete, Train t){
+    Cellule *nouv = malloc(sizeof(Cellule));
+    nouv->leTrain=t;
+    nouv->suivant = *tete;
+    *tete = nouv;
+}
 
 void traiterFic();
 void echangeClient(int, int);
 void requeteTrajet(int, int);
-struct train * getTrains(char* , char* , char* , struct train* );
-struct temps stringToTemps(char*);
+Cellule * getTrains(char* , char* , char* , Cellule* );
+Temps stringToTemps(char*);

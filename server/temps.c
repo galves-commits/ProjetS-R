@@ -10,8 +10,8 @@
 
 #include "../headers/server.h"
 
-struct temps stringToTemps(char* heure){
-    struct temps h;
+Temps stringToTemps(char* heure){
+    Temps h;
     h.heure = atoi(strtok(heure,':'));
     h.minute = atoi(strtok(NULL,':'));
     return h;

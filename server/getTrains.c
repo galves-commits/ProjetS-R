@@ -10,16 +10,16 @@
 
 #include "../headers/server.h"
 
-struct train * getTrains(char* depart, char* arrivee, char* heure, struct train* trains){
-    struct temps hDebReq;
-    struct temps hFinReq;
+Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
+    Temps hDebReq;
+    Temps hFinReq;
     
     char* p = strtok(heure,';');
     hDebReq = stringToTemps(p);
     p = strtok(NULL,';');
     hFinReq = stringToTemps(p);
     
-    
+
     int i = 0;
     while(trains!=NULL){
 
