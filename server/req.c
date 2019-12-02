@@ -20,10 +20,7 @@
 		 
 int main ()
 {
-
 	traiterFic();
-	
-  
 }
 
    

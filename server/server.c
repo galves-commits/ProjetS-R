@@ -60,10 +60,7 @@ void requeteTrajet(int echange,int ecoute){
 	write(echange,message , strlen(message)+1);
 	nbLus= read(echange,heure,MAX) ;
 
+	struct train * bonTrains;
+	getTrains();
 	printf("'%s';'%s';'%s'\n" , villeD, villeA, heure) ;
-}
-
-char **getTrain(char depart, char arrivee, char heure){
-	char ** a;
-	return a;
 }
