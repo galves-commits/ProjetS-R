@@ -61,6 +61,6 @@ void requeteTrajet(int echange,int ecoute){
 	nbLus= read(echange,heure,MAX) ;
 
 	struct train * bonTrains;
-	getTrains();
+	//getTrains();
 	printf("'%s';'%s';'%s'\n" , villeD, villeA, heure) ;
 }

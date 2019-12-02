@@ -12,7 +12,7 @@
 
 Temps stringToTemps(char* heure){
     Temps h;
-    h.heure = atoi(strtok(heure,':'));
-    h.minute = atoi(strtok(NULL,':'));
+    h.heure = atoi(strtok(heure,":"));
+    h.minute = atoi(strtok(NULL,":"));
     return h;
 }
