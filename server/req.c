@@ -15,7 +15,20 @@
  
 void traiterFic();
 
+	 struct train {
+		 int numero ;
+		 char* villeDepart ;
+		 char* villeArrivee;
+		 int heureDep ;
+		 int minuteDep ;
+		 int heureArrive ;
+		 int minuteArrive;
+		 int prix ;
+		 char* reduc ;
 
+	};
+		 
+		 
 int main ()
 {
 
@@ -47,8 +60,7 @@ void traiterFic ( ) {
 		
 		int a =0;
 		
-		while(a<i){
-			
+		while(a<i){	
 			int y=1 ;
 			char* tabTrain [MaxVille][MaxStr];
 			char *p;
@@ -64,6 +76,13 @@ void traiterFic ( ) {
 		}
 	}
  }
+ 
+ void remplirStruc(char[NBMax][NBMax]) {
+ }
+ 
+ 
+
+		
   
 
 
