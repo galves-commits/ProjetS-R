@@ -8,25 +8,14 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+
+#include "../headers/server.h"
+
 #define NBMaxTrain 100
 #define NBMax 1000
 #define MaxStr 100
 #define MaxVille 100
  
-void traiterFic();
-
-	 struct train {
-		 int numero ;
-		 char* villeDepart ;
-		 char* villeArrivee;
-		 int heureDep ;
-		 int minuteDep ;
-		 int heureArrive ;
-		 int minuteArrive;
-		 int prix ;
-		 char* reduc ;
-
-	};
 		 
 		 
 int main ()

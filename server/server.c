@@ -8,11 +8,12 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+#include "../headers/server.h"
+
 #define MAX 40000
 
 
-void echangeClient(int,int);
-void requeteTrajet(int,int);
+
 
 int main(int argc,char *argv[],char *arge[]){
 	int ecoute = socket (AF_INET , SOCK_STREAM , 0  ) ;
@@ -60,4 +61,9 @@ void requeteTrajet(int echange,int ecoute){
 	nbLus= read(echange,heure,MAX) ;
 
 	printf("'%s';'%s';'%s'\n" , villeD, villeA, heure) ;
+}
+
+char **getTrain(char depart, char arrivee, char heure){
+	char ** a;
+	return a;
 }
