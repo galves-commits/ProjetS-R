@@ -10,6 +10,7 @@ struct train
     char *villeDepart;
     char *villeArrivee;
     struct temps heureDep;
+    struct temps heureArr;
     int prix;
     char *reduc;
 };
@@ -17,4 +18,4 @@ struct train
 void traiterFic();
 void echangeClient(int, int);
 void requeteTrajet(int, int);
-char **getTrain(char, char, char);
+struct train * getTrains(char* , char* , char* , struct train* );
