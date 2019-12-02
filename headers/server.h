@@ -9,8 +9,7 @@ struct train
     int numero;
     char *villeDepart;
     char *villeArrivee;
-    struct temps heureDebut;
-    struct temps heureFin;
+    struct temps heureDep;
     int prix;
     char *reduc;
 };
