@@ -21,7 +21,22 @@ int main(int argc,char *argv[],char *arge[]){
 	memcpy(&sin.sin_addr.s_addr, host->h_addr_list[0], sizeof(sin.sin_addr.s_addr) ) ;
 	int echange ;
 	echange = connect(connection , (struct sockaddr*) &sin , sizeof(sin) ) ;
-	printf(" Je suis connecté\n" ) ; 
-	char* message = "coucou" ;
+	printf("Je suis connecté\n" ) ; 
+
+	char message[MAX];
+	char tampon[MAX];
+	int nbLus= read(connection,tampon,MAX) ;
+	printf("%s\n",tampon); 
+	fscanf(stdin,"%s",message);
+	write(connection, message, strlen(message)+1) ;
+
+	nbLus= read(connection,tampon,MAX) ;
+	printf("%s\n",tampon); 
+	fscanf(stdin,"%s",message);
+	write(connection,message , strlen(message)+1) ;
+
+	nbLus= read(connection,tampon,MAX) ;
+	printf("%s\n",tampon); 
+	fscanf(stdin,"%s",message);
 	write(connection,message , strlen(message)+1) ;
 }
