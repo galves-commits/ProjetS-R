@@ -48,10 +48,13 @@ Cellule *getTrains(char *depart, char *arrivee, char *heure, Cellule *trains)
     return bonTrains;
 }
 
-int duree(Train t)
+Temps duree(Train t)
 {
     int tDepMin = t.heureDep.heure * 60 + t.heureDep.minute;
     int tArrMin = t.heureArr.heure * 60 + t.heureArr.minute;
     int durre = tArrMin - tDepMin;
-    printf("La durée du trajet est de: %d heures et  %d minutes\n", durre / 60, durre % 60);
+    Temps dure;
+    dure.heure=durre / 60;
+    dure.minute= durre % 60;
+    return dure;
 }
