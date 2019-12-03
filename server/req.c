@@ -18,11 +18,9 @@
 
 Cellule * traiterFic()
 {
-
 	char ligneActuel[NBMaxTrain][NBMax];
 	char *s;
 	int i = 0;
-	//char *tab[NBMax];
 	Cellule *trains = malloc(sizeof(Cellule));
 	char str[MaxStr];
 	FILE *file = fopen("train.txt", "r");
@@ -66,14 +64,14 @@ void remplirStruc(char **tab, Cellule *trains)
 {
 	char *ptr;
 	double ret;
-	Train t;
-	t.numero = atoi(tab[0]);
-	t.villeDepart = tab[1];
-	t.villeArrivee = tab[2];
-	t.heureDep = stringToTemps(tab[3]);
-	t.heureArr = stringToTemps(tab[4]);
+	Train *t = malloc(sizeof(Train));;
+	t->numero = atoi(tab[0]);
+	t->villeDepart = tab[1];
+	t->villeArrivee = tab[2];
+	t->heureDep = stringToTemps(tab[3]);
+	t->heureArr = stringToTemps(tab[4]);
 	ret = strtod(tab[5], &ptr);
-	t.prix = ret;
-	t.reduc = tab[6];
-	inserTete(&trains, t);
+	t->prix = ret;
+	t->reduc = tab[6];
+	inserTete(&trains, *t);
 }

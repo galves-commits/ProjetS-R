@@ -13,10 +13,10 @@
 
 Temps stringToTemps(char *heure)
 {
-    Temps h;
-    h.heure = atoi(strtok(heure, ":"));
-    h.minute = atoi(strtok(NULL, ":"));
-    return h;
+    Temps *h = malloc(sizeof(Temps));
+    h->heure = atoi(strtok(heure, ":"));
+    h->minute = atoi(strtok(NULL, ":"));
+    return *h;
 }
 
 bool inferieur(Temps t1, Temps t2)

@@ -11,7 +11,7 @@
 #include "../headers/server.h"
 
 Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
-    Temps * hDebReq;
+    Temps * hDebReq = malloc(sizeof(Temps));
     Temps * hFinReq = malloc(sizeof(Temps));
     
     char* p = strtok(heure,";");

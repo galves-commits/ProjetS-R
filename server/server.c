@@ -12,10 +12,8 @@
 
 #define MAX 40000
 
-
-
-
 int main(int argc,char *argv[],char *arge[]){
+	Cellule *trains = traiterFic();
 	int ecoute = socket (AF_INET , SOCK_STREAM , 0  ) ;
 	struct sockaddr_in sin ;
 	sin.sin_family= AF_INET ;
@@ -60,7 +58,7 @@ void requeteTrajet(int echange,int ecoute){
 	write(echange,message , strlen(message)+1);
 	nbLus= read(echange,heure,MAX) ;
 
-	struct train * bonTrains;
+	Train * bonTrains = malloc(sizeof(Temps));
 	//getTrains();
 	printf("'%s';'%s';'%s'\n" , villeD, villeA, heure) ;
 }
