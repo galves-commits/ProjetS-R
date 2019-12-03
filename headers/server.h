@@ -22,13 +22,7 @@ typedef struct cellule{
 typedef Cellule * PCellule;
 //inserTete(&(dernier->suivant), train)
 
-void inserTete(Cellule ** tete, Train t){
-    Cellule *nouv = malloc(sizeof(Cellule));
-    nouv->leTrain=t;
-    nouv->suivant = *tete;
-    *tete = nouv;
-}
-
+void inserTete(Cellule** , Train);
 void traiterFic();
 void echangeClient(int, int);
 void requeteTrajet(int, int);

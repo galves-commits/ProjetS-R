@@ -15,17 +15,9 @@
 #define NBMax 1000
 #define MaxStr 100
 #define MaxVille 100
- 
-		 
-		 
-int main ()
-{
-	traiterFic();
-}
-
    
    
-void traiterFic ( ) {
+void traiterFic () {
 	
 	char ligneActuel [NBMaxTrain][NBMax];
 	char * s;
@@ -61,9 +53,6 @@ void traiterFic ( ) {
 		
 		}
 	}
- }
- 
- void remplirStruc(char[NBMax][NBMax]) {
  }
  
  
