@@ -53,16 +53,14 @@ Cellule * traiterFic()
 				tabTrain[a][y] = p;
 				y++;
 			}
-			remplirStruc(tabTrain[a], trains);
-			printf("'%s';'%s';'%int:%int'\n" , trains->leTrain.villeDepart,  trains->leTrain.villeArrivee, 
-		 		trains->leTrain.heureDep.heure, trains->leTrain.heureDep.minute) ;
+			trains = remplirStruc(tabTrain[a], trains);
 			a++;
 		}
 	}
 	return trains;
 }
 
-void remplirStruc(char **tab, Cellule *trains)
+Cellule * remplirStruc(char **tab, Cellule *trains)
 {
 	char *ptr;
 	double ret;
@@ -76,4 +74,5 @@ void remplirStruc(char **tab, Cellule *trains)
 	t->prix = ret;
 	t->reduc = tab[6];
 	inserTete(&trains, *t);
+	return trains;
 }

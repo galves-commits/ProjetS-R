@@ -11,6 +11,9 @@
 
 #include "../headers/server.h"
 
+#define TRUE 1
+#define FALSE 0
+
 Temps stringToTemps(char *heure)
 {
     Temps *h = malloc(sizeof(Temps));
@@ -19,23 +22,23 @@ Temps stringToTemps(char *heure)
     return *h;
 }
 
-bool inferieur(Temps t1, Temps t2)
+int inferieur(Temps t1, Temps t2)
 {
     if ((t1.heure <= t2.heure) && (t1.minute <= t2.minute))
     {
-        return true;
+        return TRUE;
     }else{
-        return false;
+        return FALSE;
     }
 }
 
-bool superieur(Temps t1, Temps t2)
+int superieur(Temps t1, Temps t2)
 {
     if ((t1.heure >= t2.heure) && (t1.minute >= t2.minute))
     {
-        return true;
+        return TRUE;
     }else{
-        return false;
+        return FALSE;
     }
 
 }

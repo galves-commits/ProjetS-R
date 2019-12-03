@@ -13,7 +13,7 @@
 Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
     Temps * hDebReq = malloc(sizeof(Temps));
     Temps * hFinReq = malloc(sizeof(Temps));
-    
+    printf("Aurevoir\n");
     char* p = strtok(heure,";");
     * hDebReq = stringToTemps(p);
     p = strtok(NULL,";");
@@ -23,18 +23,21 @@ Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
     }
 
     Cellule * t = trains;
-    Cellule * bonTrains = NULL;
-
+    Cellule * bonTrains = malloc(sizeof(Cellule));
+    int i = 0;
     while(t!=NULL){
+        printf("i = %d\n",i);
         if(strcmp(t->leTrain.villeDepart, depart)==0){
             if(strcmp(t->leTrain.villeArrivee, arrivee)==0){
                 if(superieur(t->leTrain.heureDep,*hDebReq)){
                     if(hFinReq==NULL||inferieur(t->leTrain.heureDep,*hDebReq)){
                         inserTete(&bonTrains,t->leTrain);
+                        printf("bonjour\n");
                     }
                 }
             }          
         }
+        i++;
         t = t->suivant;
     }
 
