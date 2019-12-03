@@ -50,13 +50,7 @@ void requeteTrajet(int echange,Cellule* trains){
 	char villeD[MAX];
 	char villeA[MAX];
 	char heure[MAX];
-	
-	Cellule *t = trains;
-	while(t != NULL){
-		printf("'%s';'%s';'%d:%d'\n" , t->leTrain.villeDepart,  t->leTrain.villeArrivee, 
-		 		t->leTrain.heureDep.heure, t->leTrain.heureDep.minute) ;
-		t = t->suivant;
-	}
+
 
 	char* message = "Ville de départ : " ;
 	write(echange,message , strlen(message)+1);
