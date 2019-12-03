@@ -54,6 +54,8 @@ Cellule * traiterFic()
 				y++;
 			}
 			remplirStruc(tabTrain[a], trains);
+			printf("'%s';'%s';'%int:%int'\n" , trains->leTrain.villeDepart,  trains->leTrain.villeArrivee, 
+		 		trains->leTrain.heureDep.heure, trains->leTrain.heureDep.minute) ;
 			a++;
 		}
 	}

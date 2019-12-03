@@ -14,6 +14,14 @@
 
 int main(int argc,char *argv[],char *arge[]){
 	Cellule *trains = traiterFic();
+	Cellule * t = trains;
+	printf("test\n");
+	while(t !=NULL){
+		printf("'%s';'%s';'%int:%int'\n" , t->leTrain.villeDepart,  t->leTrain.villeArrivee, 
+		 		t->leTrain.heureDep.heure, t->leTrain.heureDep.minute) ;
+		t = t->suivant;
+	}
+
 	int ecoute = socket (AF_INET , SOCK_STREAM , 0  ) ;
 	struct sockaddr_in sin ;
 	sin.sin_family= AF_INET ;
