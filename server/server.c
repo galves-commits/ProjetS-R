@@ -30,7 +30,7 @@ int main(int argc,char *argv[],char *arge[]){
 
 		switch(pid){
 			case 0:	printf("Un client s'est connecté\n" ) ;
-					echangeClient(echange,ecoute);
+					echangeClient(echange,trains);
 					break;
 
 			case -1:perror("fork");
@@ -40,11 +40,11 @@ int main(int argc,char *argv[],char *arge[]){
 	} 
 }
 
-void echangeClient(int echange, int ecoute){
-	requeteTrajet(echange,ecoute);
+void echangeClient(int echange, Cellule* trains){
+	requeteTrajet(echange,trains);
 }
 
-void requeteTrajet(int echange,int ecoute){
+void requeteTrajet(int echange,Cellule* trains){
 	char villeD[MAX];
 	char villeA[MAX];
 	char heure[MAX];
@@ -59,6 +59,11 @@ void requeteTrajet(int echange,int ecoute){
 	nbLus= read(echange,heure,MAX) ;
 
 	Train * bonTrains = malloc(sizeof(Temps));
-	//getTrains();
-	printf("'%s';'%s';'%s'\n" , villeD, villeA, heure) ;
+	Cellule * goodTrains = getTrains(villeD, villeA, heure, trains);
+	while(goodTrains !=NULL){
+		printf("'%s';'%s';'%int:%int'\n" , goodTrains->leTrain.villeDepart,  goodTrains->leTrain.villeArrivee, 
+		 		goodTrains->leTrain.heureDep.heure, goodTrains->leTrain.heureDep.minute) ;
+		goodTrains = goodTrains->suivant;
+	}
+
 }

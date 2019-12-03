@@ -32,7 +32,7 @@ void inserTete(Cellule** , Train);
 Cellule * traiterFic();
 void remplirStruc(char **tab, Cellule *trains);
 
-void echangeClient(int, int);
-void requeteTrajet(int, int);
+void requeteTrajet(int, Cellule*);
+void echangeClient(int, Cellule*);
 Cellule * getTrains(char* , char* , char* , Cellule* );
 Temps stringToTemps(char*);
