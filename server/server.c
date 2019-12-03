@@ -64,7 +64,7 @@ void requeteTrajet(int echange,Cellule* trains){
 	Cellule * goodTrains = getTrains(villeD, villeA, heure, trains);
 
 
-	while(goodTrains !=NULL){
+	while(goodTrains->suivant !=NULL){
 		printf("'%s';'%s';'%d:%d'\n" , goodTrains->leTrain.villeDepart,  goodTrains->leTrain.villeArrivee, 
 		 		goodTrains->leTrain.heureDep.heure, goodTrains->leTrain.heureDep.minute) ;
 		goodTrains = goodTrains->suivant;

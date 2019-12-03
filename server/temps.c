@@ -14,6 +14,7 @@
 #define TRUE 1
 #define FALSE 0
 
+
 Temps stringToTemps(char *heure)
 {
     Temps *h = malloc(sizeof(Temps));
