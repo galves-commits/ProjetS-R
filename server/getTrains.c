@@ -19,13 +19,6 @@ Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
     * hDebReq = stringToTemps(p);
     p = strtok(NULL,";");
 
-    Cellule *o = trains;
-	while(o != NULL){
-		printf("'%s';'%s';'%d:%d'\n" , o->leTrain.villeDepart,  o->leTrain.villeArrivee, 
-		 		o->leTrain.heureDep.heure, o->leTrain.heureDep.minute) ;
-		o = o->suivant;
-	}
-
     if (p!=NULL){
        * hFinReq = stringToTemps(p);
     }
@@ -40,7 +33,7 @@ Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
             if(strcmp(t->leTrain.villeArrivee, arrivee)==0){
 
                 inserTete(&bonTrains,t->leTrain);
-                printf("bonj%d\n",i);
+                printf("bonj%d\n",bonTrains->leTrain.numero);
 
             }
         }

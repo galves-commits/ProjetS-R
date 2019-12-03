@@ -51,7 +51,6 @@ void requeteTrajet(int echange,Cellule* trains){
 	char villeA[MAX];
 	char heure[MAX];
 
-
 	char* message = "Ville de départ : " ;
 	write(echange,message , strlen(message)+1);
 	int nbLus= read(echange,villeD,MAX) ;
@@ -63,6 +62,7 @@ void requeteTrajet(int echange,Cellule* trains){
 	nbLus= read(echange,heure,MAX) ;
 
 	Cellule * goodTrains = getTrains(villeD, villeA, heure, trains);
+
 
 	while(goodTrains !=NULL){
 		printf("'%s';'%s';'%d:%d'\n" , goodTrains->leTrain.villeDepart,  goodTrains->leTrain.villeArrivee, 
