@@ -20,11 +20,7 @@ Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
     p = strtok(NULL,";");
 
     Cellule *o = trains;
-	while(o != NULL){
-		printf("'%s';'%s';'%d:%d'\n" , o->leTrain.villeDepart,  o->leTrain.villeArrivee, 
-		 		o->leTrain.heureDep.heure, o->leTrain.heureDep.minute) ;
-		o = o->suivant;
-	}
+	
 
     if (p!=NULL){
        * hFinReq = stringToTemps(p);
