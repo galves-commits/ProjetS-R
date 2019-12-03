@@ -29,7 +29,8 @@ bool superieur(Temps t1, Temps t2);
 
 void inserTete(Cellule** , Train);
 
-void traiterFic();
+Cellule * traiterFic();
+void remplirStruc(char **tab, Cellule *trains);
 
 void echangeClient(int, int);
 void requeteTrajet(int, int);

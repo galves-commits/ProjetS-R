@@ -75,5 +75,5 @@ void remplirStruc(char **tab, Cellule *trains)
 	ret = strtod(tab[5], &ptr);
 	t.prix = ret;
 	t.reduc = tab[6];
-	inserTete(trains, t);
+	inserTete(&trains, t);
 }
