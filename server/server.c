@@ -63,11 +63,27 @@ void requeteTrajet(int echange,Cellule* trains){
 
 	Cellule * goodTrains = getTrains(villeD, villeA, heure, trains);
 
+	reponseRequete(goodTrains, echange);
+}
 
-	while(goodTrains->suivant !=NULL){
-		printf("'%s';'%s';'%d:%d'\n" , goodTrains->leTrain.villeDepart,  goodTrains->leTrain.villeArrivee, 
-		 		goodTrains->leTrain.heureDep.heure, goodTrains->leTrain.heureDep.minute) ;
-		goodTrains = goodTrains->suivant;
+void reponseRequete(Cellule * trains, int echange){
+	char reponse[MAX];
+	if(trains->suivant==NULL){
+		sprintf(reponse, "Aucun trains ne reponds a votre recherche\n");
+		printf("test");
+	}else{
+		sprintf(reponse,  "Trains disponibles : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix \t\tREDUC \t\n");
+
+		while(trains->suivant!=NULL){
+			char chaine[MAX];
+			sprintf(chaine, "%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€ \t %s\n", 
+			trains->leTrain.numero,trains->leTrain.villeDepart,trains->leTrain.villeArrivee,
+			trains->leTrain.heureDep.heure,trains->leTrain.heureDep.minute,  
+			trains->leTrain.heureArr.heure,trains->leTrain.heureArr.minute,
+			trains->leTrain.prix,trains->leTrain.reduc);
+			strcat(reponse,chaine);
+			trains=trains->suivant;
+		}
 	}
-
+	write(echange,reponse,sizeof(reponse));
 }

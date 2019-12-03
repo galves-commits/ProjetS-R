@@ -14,8 +14,7 @@
 Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
     Temps * hDebReq = malloc(sizeof(Temps));
     Temps * hFinReq = malloc(sizeof(Temps));
-    printf("Aurevoir : %d : %d\n",hFinReq->heure,hFinReq->minute);
-    printf("Aurevoir : %s : %s\n",depart,arrivee);
+    printf("Requete : %s : %s\n",depart,arrivee);
     char* p = strtok(heure,";");
     * hDebReq = stringToTemps(p);
     p = strtok(NULL,";");
@@ -26,7 +25,6 @@ Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
     }
 
     Cellule * t = trains;
-    printf("Aurevoir : %s : %s\n",t->leTrain.villeArrivee,t->leTrain.villeDepart);
     Cellule * bonTrains = malloc(sizeof(Cellule));
     int i = 0;
     while(t->suivant!=NULL){

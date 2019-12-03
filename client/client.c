@@ -39,4 +39,7 @@ int main(int argc,char *argv[],char *arge[]){
 	printf("%s\n",tampon); 
 	fscanf(stdin,"%s",message);
 	write(connection,message , strlen(message)+1) ;
+
+	nbLus= read(connection,tampon,MAX) ;
+	printf("%s\n",tampon); 
 }

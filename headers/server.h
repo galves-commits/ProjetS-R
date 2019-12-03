@@ -35,6 +35,7 @@ Cellule * remplirStruc(char **tab, Cellule *trains);
 
 void requeteTrajet(int, Cellule*);
 void echangeClient(int, Cellule*);
+void reponseRequete(Cellule * trains, int echange);
 Cellule * getTrains(char* , char* , char* , Cellule* );
 Temps stringToTemps(char*);
 Temps duree(Train );
