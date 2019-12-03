@@ -10,33 +10,48 @@
 
 #include "../headers/server.h"
 
-Cellule * getTrains(char* depart, char* arrivee, char* heure, Cellule* trains){
-    Temps * hDebReq;
-    Temps * hFinReq = malloc(sizeof(Temps));
-    
-    char* p = strtok(heure,";");
-    * hDebReq = stringToTemps(p);
-    p = strtok(NULL,";");
+Cellule *getTrains(char *depart, char *arrivee, char *heure, Cellule *trains)
+{
+    Temps *hDebReq;
+    Temps *hFinReq = malloc(sizeof(Temps));
 
-    if (p!=NULL){
-       * hFinReq = stringToTemps(p);
+    char *p = strtok(heure, ";");
+    *hDebReq = stringToTemps(p);
+    p = strtok(NULL, ";");
+
+    if (p != NULL)
+    {
+        *hFinReq = stringToTemps(p);
     }
 
-    Cellule * t = trains;
-    Cellule * bonTrains = NULL;
+    Cellule *t = trains;
+    Cellule *bonTrains = NULL;
 
-    while(t!=NULL){
-        if(strcmp(t->leTrain.villeDepart, depart)==0){
-            if(strcmp(t->leTrain.villeArrivee, arrivee)==0){
-                if(superieur(t->leTrain.heureDep,*hDebReq)){
-                    if(hFinReq==NULL||inferieur(t->leTrain.heureDep,*hDebReq)){
-                        inserTete(&bonTrains,t->leTrain);
+    while (t != NULL)
+    {
+        if (strcmp(t->leTrain.villeDepart, depart) == 0)
+        {
+            if (strcmp(t->leTrain.villeArrivee, arrivee) == 0)
+            {
+                if (superieur(t->leTrain.heureDep, *hDebReq))
+                {
+                    if (hFinReq == NULL || inferieur(t->leTrain.heureDep, *hDebReq))
+                    {
+                        inserTete(&bonTrains, t->leTrain);
                     }
                 }
-            }          
+            }
         }
         t = t->suivant;
     }
 
     return bonTrains;
+}
+
+int duree(Train t)
+{
+    int tDepMin = t.heureDep.heure * 60 + t.heureDep.minute;
+    int tArrMin = t.heureArr.heure * 60 + t.heureArr.minute;
+    int durre = tArrMin - tDepMin;
+    printf("La durée du trajet est de: %d heures et  %d minutes\n", durre / 60, durre % 60);
 }
