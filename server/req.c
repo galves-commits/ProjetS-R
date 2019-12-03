@@ -15,8 +15,9 @@
 #define NBMax 1000
 #define MaxStr 100
 #define MaxVille 100
-   
-   
+ 
+
+	
 void traiterFic () {
 	
 	char ligneActuel [NBMaxTrain][NBMax];
@@ -49,11 +50,33 @@ void traiterFic () {
 				tabTrain[a][y] = p;
 				y++;
 			}
+			remplirStruc(tabTrain[a]);
 			a++;
-		
 		}
 	}
  }
+ 
+  void remplirStruc(char** tab ) {
+	 int i = 0 ; 
+	 char *ptr;
+     double ret;
+     struct train  t ;
+	 while( i <= NBMaxTrain)  {
+		 t.numero = atoi(tab[0]) ;
+		 t.villeDepart = tab[1] ;
+		 t.villeArrivee = tab[2] ; 
+		 t.heureDep = stringToTemps(tab[3]) ;
+		 t.heureArr = stringToTemps(tab[4]) ;
+		 ret = strtod(tab[5], &ptr);
+		 t.prix = ret ;
+		 t.reduc = tab[6] ; 
+		 printf ( "%s" , t.reduc ) ;
+		 i++ ; 
+		 
+	}
+}
+		 
+
  
  
 
