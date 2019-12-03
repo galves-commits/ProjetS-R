@@ -50,8 +50,8 @@ Temps duree(Train t)
     int tDepMin = t.heureDep.heure * 60 + t.heureDep.minute;
     int tArrMin = t.heureArr.heure * 60 + t.heureArr.minute;
     int durre = tArrMin - tDepMin;
-    Temps dure;
-    dure.heure=durre / 60;
-    dure.minute= durre % 60;
-    return dure;
+    Temps * dure = malloc(sizeof(Temps));;
+    dure->heure=durre / 60;
+    dure->minute= durre % 60;
+    return *dure;
 }
