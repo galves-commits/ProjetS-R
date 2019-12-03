@@ -37,3 +37,4 @@ void requeteTrajet(int, Cellule*);
 void echangeClient(int, Cellule*);
 Cellule * getTrains(char* , char* , char* , Cellule* );
 Temps stringToTemps(char*);
+Temps duree(Train );
