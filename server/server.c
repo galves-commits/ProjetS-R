@@ -10,6 +10,7 @@
 
 #include "../headers/trains.h"
 #include "../headers/server.h"
+#include "../headers/dialogue.h"
 
 int main(int argc, char *argv[], char *arge[])
 {
@@ -32,7 +33,7 @@ int main(int argc, char *argv[], char *arge[])
 		{
 		case 0:
 			printf("Un client s'est connecté\n");
-			echangeClient(echange, trains);
+			requeteTrajet(echange, trains);
 			break;
 
 		case -1:
@@ -43,10 +44,6 @@ int main(int argc, char *argv[], char *arge[])
 	}
 }
 
-void echangeClient(int echange, Cellule *trains)
-{
-	requeteTrajet(echange, trains);
-}
 
 void requeteTrajet(int echange, Cellule *trains)
 {
@@ -85,24 +82,4 @@ void requeteTrajet(int echange, Cellule *trains)
 	}
 }
 
-void reponseRequete(Cellule *trains, int echange, int nbtrains)
-{
-	char reponse[10];
-	sprintf(reponse,"%d\n", nbtrains);
-	write(echange, reponse, sizeof(reponse));
 
-	while (trains->suivant != NULL)
-	{
-		char chaine[MAX];
-		double prixReduc = getReduc(trains->leTrain);
-
-		sprintf(chaine, "%d;%s;%s;%d:%d;%d:%d;%f;",
-				trains->leTrain.numero, trains->leTrain.villeDepart, trains->leTrain.villeArrivee,
-				trains->leTrain.heureDep.heure, trains->leTrain.heureDep.minute,
-				trains->leTrain.heureArr.heure, trains->leTrain.heureArr.minute,
-				prixReduc);
-		trains = trains->suivant;
-		printf("%s\n",chaine);
-		write(echange, chaine, sizeof(chaine));
-	}
-}

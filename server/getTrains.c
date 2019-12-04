@@ -137,3 +137,51 @@ double getReduc(Train t){
     return prix;
 }
 
+Train trierParPrix(Cellule *trains)
+{
+	Train tMin = trains->leTrain;
+	Cellule *t = trains;
+	while (t->suivant != NULL)
+	{
+		if (t->leTrain.prix < tMin.prix)
+		{
+			tMin = t->leTrain;
+		}
+		t = t->suivant;
+	}
+	return tMin;
+}
+
+Train trierParTemps(Cellule *trains)
+{
+	Train tMin = trains->leTrain;
+	Cellule *t = trains;
+	while (t->suivant != NULL)
+	{
+
+		if (inferieur(dureeVoy(t->leTrain), dureeVoy(tMin)))
+		{
+			tMin = t->leTrain;
+		}
+		t = t->suivant;
+	}
+	return tMin;
+}
+
+
+void afficherTrains(char* message,Cellule *trains)
+{
+	Cellule *t = trains;
+
+	printf( "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
+
+	while (t->suivant != NULL)
+	{
+		printf("%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€\n",
+				t->leTrain.numero, t->leTrain.villeDepart, t->leTrain.villeArrivee,
+				t->leTrain.heureDep.heure, t->leTrain.heureDep.minute,
+				t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,
+				t->leTrain.prix);
+		t = t->suivant;
+	}
+}
