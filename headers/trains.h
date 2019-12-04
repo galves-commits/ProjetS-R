@@ -30,6 +30,6 @@ Temps duree(Train );
 Cellule * getTBTrains(char *, char *, char* ,Cellule *);
 Cellule * getTHTrains(char *, char *, char* ,Cellule *);
 Cellule * getTVTrains(char *, char *, Cellule *);
-
+double getReduc(Train t);
 int inferieur(Temps t1, Temps t2);
 int superieur(Temps t1, Temps t2);
