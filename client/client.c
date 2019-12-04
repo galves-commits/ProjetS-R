@@ -14,7 +14,9 @@
 #define MAX 40000
 
 Cellule *recupTrain(int, int);
-void afficherTrains(Cellule *trains);
+void afficherTrains(char*,Cellule *trains);
+Train trierParTemps(Cellule *trains);
+Train trierParPrix(Cellule *trains);
 
 int main(int argc, char *argv[], char *arge[])
 {
@@ -62,11 +64,37 @@ int main(int argc, char *argv[], char *arge[])
 	int nbTrains = atoi(tampon);
 	printf("%s\n", tampon);
 
-	if (nbTrains==0){
+	if (nbTrains == 0)
+	{
 		printf("Aucun trains disponible\n");
-	}else{
+	}
+	else
+	{
 		Cellule *trains = recupTrain(nbTrains, connection);
-		afficherTrains(trains);
+		afficherTrains("Trains disponible",trains);
+		char ans[MAX];
+		printf("Voulez vous le trajet le plus rapide(R) ? \n Le moins cher(P) ? \n Q pour quitter");
+		fscanf(stdin, "%s", ans);
+		if (strcmp(ans, "R") == 0)
+		{	
+			Cellule * tMin = malloc(sizeof(Cellule));
+			Train *t = trieParDuree(trains);
+			inserTete(&tMin,*t);
+			afficherTrains("Le train le plus rapide est" , tMin);
+			
+		}
+		if (strcmp(ans, "P") == 0)
+		{
+			Train *t = trieParPrix(trains);
+			Cellule * tMinprix = malloc(sizeof(Cellule));
+			inserTete(&tMinprix,*t);
+			afficherTrains("Le train le plus rapide est" , tMinprix);
+		}
+		if (strcmp(ans, "Q") == 0)
+		{
+			close(connection);
+			exit(EXIT_SUCCESS);
+		}
 	}
 }
 
@@ -89,8 +117,6 @@ Cellule *recupTrain(int nbTrains, int connection)
 
 		char *ptr;
 
-
-
 		int nbLus = read(connection, tampon, MAX);
 		sscanf(tampon, "%[^;\n];%[^;\n];%[^;\n];%[^;\n];%[^;\n];%[^;\n]",
 			   numero, vDep, vAr, h1, h2, prix);
@@ -101,18 +127,27 @@ Cellule *recupTrain(int nbTrains, int connection)
 		t->heureArr = stringToTemps(h2);
 		t->heureDep = stringToTemps(h1);
 
+<<<<<<< HEAD
+=======
+		printf("%s\n", t->villeArrivee);
+
+>>>>>>> 9e51891ceb494762db40bb622159bc799aaa9276
 		inserTete(&trains, *t);
 		i++;
 	}
 	return trains;
 }
 
-void afficherTrains(Cellule *trains)
+void afficherTrains(char* message,Cellule *trains)
 {
-	Cellule * t = trains; 
+	Cellule *t = trains;
 	char reponse[MAX];
 
+<<<<<<< HEAD
 	sprintf(reponse, "Trains disponibles : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t Prix\n");
+=======
+	sprintf(reponse, "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
+>>>>>>> 9e51891ceb494762db40bb622159bc799aaa9276
 
 	while (t->suivant != NULL)
 	{
@@ -126,4 +161,34 @@ void afficherTrains(Cellule *trains)
 		t = t->suivant;
 	}
 	printf("%s", reponse);
+}
+
+Train trierParPrix(Cellule *trains)
+{
+	Train tMin = trains->leTrain;
+	Cellule *t = trains;
+	while (t->suivant != NULL)
+	{
+		if (t->leTrain.prix < tMin.prix)
+		{
+			tMin = t->leTrain;
+		}
+		t = t->suivant;
+	}
+	return tMin;
+}
+Train trierParTemps(Cellule *trains)
+{
+	Train tMin = trains->leTrain;
+	Cellule *t = trains;
+	while (t->suivant != NULL)
+	{
+
+		if (inferieur(duree(t->leTrain), duree(tMin)))
+		{
+			tMin = t->leTrain;
+		}
+		t = t->suivant;
+	}
+	return tMin;
 }
