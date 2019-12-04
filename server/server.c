@@ -53,22 +53,19 @@ void requeteTrajet(int echange,Cellule* trains){
 	char villeA[MAX];
 	char heure[MAX] ;
 	read(echange,req,MAX) ;
-	scanf("%s;%s" , protocole , reste ) ;
+	sscanf(req,"%s;%s;%s;%s;%s" , protocole , villeD, villeA , heure) ;
 		if (strcmp(protocole , "TV") ==0 ) {
-			scanf("%s;%s;%s" , protocole, villeD , villeA) ;
 			Cellule * goodTrains = getTrains(protocole , villeD,villeA, "",trains ) ;
 			reponseRequete(goodTrains, echange);
 
 		}else{ 
 			if(strcmp(protocole , "TH" ) == 0 ) {
-				scanf("%s;%s;%s;%s" , protocole, villeD , villeA , heure) ;
 				Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure,trains ) ;
 				reponseRequete(goodTrains, echange);
 
 				
 			}else{
 				if(strcmp(protocole , "TB" ) == 0 ) {
-					scanf("%s;%s;%s;%s" , protocole, villeD , villeA , heure) ;
 					Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure, trains ) ;
 					reponseRequete(goodTrains, echange);
 				}
