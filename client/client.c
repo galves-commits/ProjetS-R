@@ -127,11 +127,6 @@ Cellule *recupTrain(int nbTrains, int connection)
 		t->heureArr = stringToTemps(h2);
 		t->heureDep = stringToTemps(h1);
 
-<<<<<<< HEAD
-=======
-		printf("%s\n", t->villeArrivee);
-
->>>>>>> 9e51891ceb494762db40bb622159bc799aaa9276
 		inserTete(&trains, *t);
 		i++;
 	}
@@ -143,11 +138,7 @@ void afficherTrains(char* message,Cellule *trains)
 	Cellule *t = trains;
 	char reponse[MAX];
 
-<<<<<<< HEAD
-	sprintf(reponse, "Trains disponibles : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t Prix\n");
-=======
 	sprintf(reponse, "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
->>>>>>> 9e51891ceb494762db40bb622159bc799aaa9276
 
 	while (t->suivant != NULL)
 	{
