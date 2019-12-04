@@ -8,9 +8,11 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+
+#include "../headers/trains.h"
 #include "../headers/server.h"
 
-Cellule *getTrains(char *depart, char *arrivee, char *heure, Cellule *trains)
+Cellule *getTrains(char* protocol, char *depart, char *arrivee, char *heure, Cellule *trains)
 {
     int borne;
     Temps *hDebReq = malloc(sizeof(Temps));

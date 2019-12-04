@@ -8,6 +8,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+
+#include "../headers/trains.h"
 #include "../headers/server.h"
 
 #define MAX 40000
@@ -58,7 +60,7 @@ void requeteTrajet(int echange,Cellule* trains){
 	write(echange,message , strlen(message)+1);
 	nbLus= read(echange,heure,MAX) ;
 
-	Cellule * goodTrains = getTrains(villeD, villeA, heure, trains);
+	Cellule * goodTrains = getTrains("TV",villeD, villeA, heure, trains);
 
 	reponseRequete(goodTrains, echange);
 }
