@@ -125,11 +125,21 @@ Temps duree(Train t)
 
 double getReduc(Train t){
     double prix = t.prix;
+<<<<<<< HEAD
     if(strcmp(t.reduc,"REDUC")==0){
         prix = t.prix * 0.8;
     }
     if(strcmp(t.reduc,"SUPPL")==0){
         prix = t.prix * 1.1;
+=======
+    if(t.reduc!=NULL){
+        if(strcmp(t.reduc,"REDUC")==0){
+            prix = t.prix * 0.8;
+        }
+        if(strcmp(t.reduc,"SUPPL")==0){
+            prix = t.prix * 1.1;
+        }
+>>>>>>> 9322bcec3207f3cdbaf26870cebffa5cd8b85968
     }
     return prix;
 }
