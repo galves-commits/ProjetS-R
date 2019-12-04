@@ -24,7 +24,9 @@ typedef struct cellule{
     struct cellule* suivant;
 }Cellule;
 typedef Cellule * PCellule;
-//inserTete(&(dernier->suivant), train)
+
+void inserTete(Cellule** , Train);
+
 Temps stringToTemps(char*);
 Temps duree(Train );
 Cellule * getTrains(char *,char* , char* , char* , Cellule*,int* );

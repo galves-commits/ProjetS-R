@@ -14,7 +14,7 @@
 
 Cellule * getTrains(char* protocol, char *depart, char *arrivee, char *heure, Cellule *trains, int* nbtrains)
 {
-    printf("Requete : %s : %s\n", depart, arrivee);
+    printf("Requete : %s : %s : %s\n",protocol, depart, arrivee);
 
     if(strcmp(protocol,"TV")==0){
         return getTVTrains(depart,arrivee,trains,nbtrains);

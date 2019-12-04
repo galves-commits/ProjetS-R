@@ -94,16 +94,15 @@ void reponseRequete(Cellule *trains, int echange, int nbtrains)
 	while (trains->suivant != NULL)
 	{
 		char chaine[MAX];
+		double prixReduc = getReduc(trains->leTrain);
 
-		Temps dureeTraj = duree(trains->leTrain);
-
-		sprintf(chaine, "%d;%s;%s;%d:%d;%d:%d;%f;%s\n",
+		sprintf(chaine, "%d;%s;%s;%d:%d;%d:%d;%f;",
 				trains->leTrain.numero, trains->leTrain.villeDepart, trains->leTrain.villeArrivee,
 				trains->leTrain.heureDep.heure, trains->leTrain.heureDep.minute,
 				trains->leTrain.heureArr.heure, trains->leTrain.heureArr.minute,
-				trains->leTrain.prix, trains->leTrain.reduc);
-		strcat(reponse, chaine);
+				prixReduc);
 		trains = trains->suivant;
-		write(echange, reponse, sizeof(reponse));
+		printf("%s\n",chaine);
+		write(echange, chaine, sizeof(chaine));
 	}
 }
