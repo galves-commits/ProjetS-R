@@ -136,22 +136,18 @@ Cellule *recupTrain(int nbTrains, int connection)
 void afficherTrains(char* message,Cellule *trains)
 {
 	Cellule *t = trains;
-	char reponse[MAX];
 
-	sprintf(reponse, "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
+	printf( "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
 
 	while (t->suivant != NULL)
 	{
-		char chaine[MAX];
-		sprintf(chaine, "%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€\n",
+		printf("%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€\n",
 				t->leTrain.numero, t->leTrain.villeDepart, t->leTrain.villeArrivee,
 				t->leTrain.heureDep.heure, t->leTrain.heureDep.minute,
 				t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,
 				t->leTrain.prix);
-		strcat(reponse, chaine);
 		t = t->suivant;
 	}
-	printf("%s", reponse);
 }
 
 Train trierParPrix(Cellule *trains)
