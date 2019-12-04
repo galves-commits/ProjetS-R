@@ -46,24 +46,37 @@ void echangeClient(int echange, Cellule* trains){
 }
 
 void requeteTrajet(int echange,Cellule* trains){
+	char req[MAX];
+	char protocole[MAX];
+	char reste[MAX];
 	char villeD[MAX];
 	char villeA[MAX];
-	char heure[MAX];
+	char heure[MAX] ;
+	read(echange,req,MAX) ;
+	scanf("%s;%s" , protocole , reste ) ;
+		if (strcmp(protocole , "TV") ==0 ) {
+			scanf("%s;%s;%s" , protocole, villeD , villeA) ;
+			Cellule * goodTrains = getTrains(protocole , villeD,villeA, "",trains ) ;
+			reponseRequete(goodTrains, echange);
 
-	char* message = "Ville de départ : " ;
-	write(echange,message , strlen(message)+1);
-	int nbLus= read(echange,villeD,MAX) ;
-	message = "Ville d'arrive : ";
-	write(echange, message , strlen(message)+1);
-	nbLus= read(echange,villeA,MAX) ;
-	message = "Horraires : ";
-	write(echange,message , strlen(message)+1);
-	nbLus= read(echange,heure,MAX) ;
+		}else{ 
+			if(strcmp(protocole , "TH" ) == 0 ) {
+				scanf("%s;%s;%s;%s" , protocole, villeD , villeA , heure) ;
+				Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure,trains ) ;
+				reponseRequete(goodTrains, echange);
 
-	Cellule * goodTrains = getTrains("TV",villeD, villeA, heure, trains);
-
-	reponseRequete(goodTrains, echange);
+				
+			}else{
+				if(strcmp(protocole , "TB" ) == 0 ) {
+					scanf("%s;%s;%s;%s" , protocole, villeD , villeA , heure) ;
+					Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure, trains ) ;
+					reponseRequete(goodTrains, echange);
+				}
+			}
+		}
 }
+
+
 
 void reponseRequete(Cellule * trains, int echange){
 	char reponse[MAX];
