@@ -71,7 +71,8 @@ Cellule * getTHTrains(char *depart, char *arrivee, char* heure ,Cellule *trains)
 Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains){
     Cellule *t = trains;
     Cellule *bonTrains = malloc(sizeof(Cellule));
-    char * h1,h2;
+    char * h1;
+    char * h2;
     sscanf(heure,"%s-%s",h1,h2);
     Temps hDebReq = stringToTemps(h1);
     Temps hFinReq = stringToTemps(h2);
