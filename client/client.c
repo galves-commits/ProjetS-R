@@ -73,21 +73,21 @@ int main(int argc, char *argv[], char *arge[])
 		Cellule *trains = recupTrain(nbTrains, connection);
 		afficherTrains("Trains disponible",trains);
 		char ans[MAX];
-		printf("Voulez vous le trajet le plus rapide(R) ? \n Le moins cher(P) ? \n Q pour quitter");
+		printf("Voulez vous le trajet le plus rapide(R) ? Le moins cher(P) ? Q pour quitter\n");
 		fscanf(stdin, "%s", ans);
 		if (strcmp(ans, "R") == 0)
 		{	
 			Cellule * tMin = malloc(sizeof(Cellule));
-			Train *t = trieParDuree(trains);
-			inserTete(&tMin,*t);
+			Train t = trierParTemps(trains);
+			inserTete(&tMin,t);
 			afficherTrains("Le train le plus rapide est" , tMin);
 			
 		}
 		if (strcmp(ans, "P") == 0)
 		{
-			Train *t = trieParPrix(trains);
+			Train t = trierParPrix(trains);
 			Cellule * tMinprix = malloc(sizeof(Cellule));
-			inserTete(&tMinprix,*t);
+			inserTete(&tMinprix,t);
 			afficherTrains("Le train le plus rapide est" , tMinprix);
 		}
 		if (strcmp(ans, "Q") == 0)
@@ -175,7 +175,7 @@ Train trierParTemps(Cellule *trains)
 	while (t->suivant != NULL)
 	{
 
-		if (inferieur(duree(t->leTrain), duree(tMin)))
+		if (inferieur(dureeVoy(t->leTrain), dureeVoy(tMin)))
 		{
 			tMin = t->leTrain;
 		}

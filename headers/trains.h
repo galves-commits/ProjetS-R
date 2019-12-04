@@ -28,7 +28,7 @@ typedef Cellule * PCellule;
 void inserTete(Cellule** , Train);
 
 Temps stringToTemps(char*);
-Temps duree(Train );
+Temps dureeVoy(Train );
 Cellule * getTrains(char *,char* , char* , char* , Cellule*,int* );
 Cellule * getTBTrains(char *, char *, char* ,Cellule *, int*);
 Cellule * getTHTrains(char *, char *, char* ,Cellule *, int*);

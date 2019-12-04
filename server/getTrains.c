@@ -111,7 +111,7 @@ Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
     return bonTrains;
 }
 
-Temps duree(Train t)
+Temps dureeVoy(Train t)
 {
     int tDepMin = t.heureDep.heure * 60 + t.heureDep.minute;
     int tArrMin = t.heureArr.heure * 60 + t.heureArr.minute;
