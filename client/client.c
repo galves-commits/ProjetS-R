@@ -52,7 +52,5 @@ int main(int argc,char *argv[],char *arge[]){
 
 
 	nbLus= read(connection,tampon,MAX) ;
-	printf("%s\n",tampon);
-	char tab [MAX][MAX][MAX];
-	sscanf(tampon,"%[^;\n];%[^;\n];%[^;\n];%[^;\n];%[^;\n]",tab) ;
+	printf("%s\n",tampon); 
 }
