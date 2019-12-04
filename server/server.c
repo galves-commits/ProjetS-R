@@ -79,15 +79,19 @@ void requeteTrajet(int echange,Cellule* trains){
 
 void reponseRequete(Cellule * trains, int echange,int nbtrains){
 	char reponse[MAX];
+	char nbt[MAX];
 	printf("%d\n",nbtrains);
-	if(trains->suivant==NULL){
+	sprintf(nbt, "%d",nbtrains);
+	printf("%s\n",nbt);
+	write(echange,nbt,sizeof(nbt));
+	if(nbtrains=0){
 		sprintf(reponse, "%d",nbtrains);
 	}else{
-		while(trains->suivant!=NULL){
+		int i=1;
+		while(i!=nbtrains){
 			char chaine[MAX];
 
 			Temps dureeTraj = duree(trains->leTrain);
-
 
 			sprintf(chaine, "%d;%s;%s;%d:%d;%d:%d;%f;%s\n", 
 			trains->leTrain.numero,trains->leTrain.villeDepart,trains->leTrain.villeArrivee,
@@ -97,7 +101,7 @@ void reponseRequete(Cellule * trains, int echange,int nbtrains){
 			strcat(reponse,chaine);
 			trains=trains->suivant;
 			write(echange,reponse,sizeof(reponse));
-
+			i++;
 		}
 	}
 }
