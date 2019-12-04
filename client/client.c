@@ -36,17 +36,17 @@ int main(int argc,char *argv[],char *arge[]){
 		printf("Ville d'arrivé : ");
 		fscanf(stdin,"%s",arr);
 	if(strcmp(req,"TV")==0){
-		sprintf(reponse, "%s,%s;%s\n", req,dep,arr);
+		sprintf(reponse, "%s;%s;%s\n", req,dep,arr);
 	}
 	if(strcmp(req,"TH")==0){
-		printf("Horraire : ");
+		printf("Horraire (XX:XX): ");
 		fscanf(stdin,"%s",hor);
 		sprintf(reponse, "%s;%s;%s;%s\n", req,dep,arr,hor);
 	}
 	if(strcmp(req,"TB")==0){
-		printf("Horraire : ");
+		printf("Horraire (XX:XX-XX:XX) : ");
 		fscanf(stdin,"%s",hor);
-		sprintf(reponse, "%s,%s;%s;%s\n", req,dep,arr,hor);
+		sprintf(reponse, "%s;%s;%s;%s\n", req,dep,arr,hor);
 	}
 	write(connection,reponse , strlen(reponse)+1) ;
 
