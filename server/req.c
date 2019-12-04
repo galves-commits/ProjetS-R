@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#include "../headers/trains.h"
 #include "../headers/server.h"
 
 #define NBMaxTrain 100

@@ -51,24 +51,25 @@ void requeteTrajet(int echange,Cellule* trains){
 	char villeA[MAX];
 	char heure[MAX] ;
 	int nblus = read(echange,req,MAX) ;
+	int  nbtrains;
 	
 	sscanf(req,"%[^;\n];%[^;\n];%[^;\n];%[^;\n]" , protocole , villeD, villeA , heure) ;
 	printf("%s",req);
 	printf("'%d';'%s';'%s';'%s';'%s'\n" ,nblus, protocole , villeD, villeA , heure);
 		if (strcmp(protocole , "TV") ==0 ) {
-			Cellule * goodTrains = getTrains(protocole , villeD,villeA, "",trains ) ;
-			reponseRequete(goodTrains, echange);
+			Cellule * goodTrains = getTrains(protocole , villeD,villeA, "",trains ,&nbtrains) ;
+			reponseRequete(goodTrains, echange,nbtrains);
 
 		}else{ 
 			if(strcmp(protocole , "TH" ) == 0 ) {
-				Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure,trains ) ;
-				reponseRequete(goodTrains, echange);
+				Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure,trains ,&nbtrains) ;
+				reponseRequete(goodTrains, echange, nbtrains);
 
 				
 			}else{
 				if(strcmp(protocole , "TB" ) == 0 ) {
-					Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure, trains ) ;
-					reponseRequete(goodTrains, echange);
+					Cellule * goodTrains = getTrains(protocole , villeD, villeA , heure, trains,&nbtrains ) ;
+					reponseRequete(goodTrains, echange, nbtrains);
 				}
 			}
 		}
@@ -76,28 +77,27 @@ void requeteTrajet(int echange,Cellule* trains){
 
 
 
-void reponseRequete(Cellule * trains, int echange){
+void reponseRequete(Cellule * trains, int echange,int nbtrains){
 	char reponse[MAX];
+	printf("%d\n",nbtrains);
 	if(trains->suivant==NULL){
-		sprintf(reponse, "Aucun trains ne reponds a votre recherche\n");
-		printf("test");
+		sprintf(reponse, "%d",nbtrains);
 	}else{
-		sprintf(reponse,  "Trains disponibles : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix \t\tREDUC \t\n");
-
 		while(trains->suivant!=NULL){
 			char chaine[MAX];
 
 			Temps dureeTraj = duree(trains->leTrain);
 
 
-			sprintf(chaine, "%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€ \t %s\n", 
+			sprintf(chaine, "%d;%s;%s;%d:%d;%d:%d;%f;%s\n", 
 			trains->leTrain.numero,trains->leTrain.villeDepart,trains->leTrain.villeArrivee,
 			trains->leTrain.heureDep.heure,trains->leTrain.heureDep.minute,  
 			trains->leTrain.heureArr.heure,trains->leTrain.heureArr.minute,
 			trains->leTrain.prix,trains->leTrain.reduc);
 			strcat(reponse,chaine);
 			trains=trains->suivant;
+			write(echange,reponse,sizeof(reponse));
+
 		}
 	}
-	write(echange,reponse,sizeof(reponse));
 }
