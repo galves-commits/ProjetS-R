@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#include "../headers/trains.h"
+
 #define MAX 40000
 
 
@@ -51,6 +53,10 @@ int main(int argc,char *argv[],char *arge[]){
 	write(connection,reponse , strlen(reponse)+1) ;
 
 
-	nbLus= read(connection,tampon,MAX) ;
+	nbLus= read(connection,tampon,MAX);
+	int nbTRains = atoi(tampon);
 	printf("%s\n",tampon); 
+	int i = 0;
+	Cellule * trains = malloc(sizeof(Cellule));
+	
 }
