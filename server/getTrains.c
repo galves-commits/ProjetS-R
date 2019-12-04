@@ -71,11 +71,16 @@ Cellule * getTHTrains(char *depart, char *arrivee, char* heure ,Cellule *trains)
 Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains){
     Cellule *t = trains;
     Cellule *bonTrains = malloc(sizeof(Cellule));
-    char * h1;
-    char * h2;
-    sscanf(heure,"%[^-\n]-%[^-\n]",h1,h2);
-    Temps hDebReq = stringToTemps(h1);
-    Temps hFinReq = stringToTemps(h2);
+
+    char h1[MAX];
+    char h2[MAX];
+    sscanf(heure,"%[^-]-%[^-]",h1,h2);
+    printf("'%s' '%s'\n",h1,h2);
+    Temps *hDebReq = malloc(sizeof(Temps)); 
+    *hDebReq = stringToTemps(h1);
+    Temps *hFinReq = malloc(sizeof(Temps));  
+    *hFinReq = stringToTemps(h2);
+        printf("Bob\n");
 
 
     while (t->suivant != NULL)
@@ -84,9 +89,9 @@ Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains)
         {
             if (strcmp(t->leTrain.villeArrivee, arrivee) == 0)
             {
-                if (superieur(t->leTrain.heureDep, hDebReq))
+                if (superieur(t->leTrain.heureDep, *hDebReq))
                 {
-                    if ((inferieur(t->leTrain.heureDep, hFinReq)))
+                    if ((inferieur(t->leTrain.heureDep, *hFinReq)))
                     {
                         inserTete(&bonTrains, t->leTrain);
                     }

@@ -1,3 +1,5 @@
+#define MAX 40000
+
 void inserTete(Cellule** , Train);
 
 Cellule * traiterFic();

@@ -8,11 +8,9 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-
 #include "../headers/trains.h"
 #include "../headers/server.h"
 
-#define MAX 40000
 
 int main(int argc,char *argv[],char *arge[]){
 	Cellule *trains = traiterFic();

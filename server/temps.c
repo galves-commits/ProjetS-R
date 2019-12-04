@@ -26,21 +26,17 @@ Temps stringToTemps(char *heure)
 
 int inferieur(Temps t1, Temps t2)
 {
-    if ((t1.heure <= t2.heure) && (t1.minute <= t2.minute))
-    {
-        return TRUE;
-    }else{
-        return FALSE;
-    }
+    int t1min = t1.heure * 60 + t1.minute;
+    int t2min = t2.heure * 60 + t2.minute;
+
+    return t1min <= t2min;
 }
 
 int superieur(Temps t1, Temps t2)
 {
-    if ((t1.heure >= t2.heure) && (t1.minute >= t2.minute))
-    {
-        return TRUE;
-    }else{
-        return FALSE;
-    }
+    int t1min = t1.heure * 60 + t1.minute;
+    int t2min = t2.heure * 60 + t2.minute;
+
+    return t1min >= t2min;
 
 }
