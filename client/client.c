@@ -37,7 +37,7 @@ int main(int argc,char *argv[],char *arge[]){
 
 	nbLus= read(connection,tampon,MAX) ;
 	printf("%s\n",tampon); 
-	fscanf(stdin,"%s",message);
+	fgets(message, MAX, stdin);
 	write(connection,message , strlen(message)+1) ;
 
 	nbLus= read(connection,tampon,MAX) ;

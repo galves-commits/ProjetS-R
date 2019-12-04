@@ -14,22 +14,19 @@
 
 int main(int argc,char *argv[],char *arge[]){
 	Cellule *trains = traiterFic();
-	printf("test\n");
+	printf("Runing\n");
 
 	int ecoute = socket (AF_INET , SOCK_STREAM , 0  ) ;
 	struct sockaddr_in sin ;
 	sin.sin_family= AF_INET ;
-
-
 	sin.sin_port = htons(7777) ;
 	sin.sin_addr.s_addr = htonl(INADDR_ANY ) ;
 	bind(ecoute , (struct sockaddr*) &sin , sizeof(sin) ) ;
 	listen(ecoute, 5 );
-	while(true){
 
+	while(true){
 		int echange = accept (ecoute ,NULL,NULL);
 		pid_t pid = fork();
-
 		switch(pid){
 			case 0:	printf("Un client s'est connecté\n" ) ;
 					echangeClient(echange,trains);
@@ -76,6 +73,10 @@ void reponseRequete(Cellule * trains, int echange){
 
 		while(trains->suivant!=NULL){
 			char chaine[MAX];
+
+			Temps dureeTraj = duree(trains->leTrain);
+
+
 			sprintf(chaine, "%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€ \t %s\n", 
 			trains->leTrain.numero,trains->leTrain.villeDepart,trains->leTrain.villeArrivee,
 			trains->leTrain.heureDep.heure,trains->leTrain.heureDep.minute,  
