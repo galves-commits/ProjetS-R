@@ -152,7 +152,7 @@ Train trierParPrix(Cellule *trains)
 		}
 		t = t->suivant;
 	}
-    free(t);
+    //free(t);
 	return tMin;
 }
 
@@ -170,7 +170,7 @@ Train trierParTemps(Cellule *trains)
 		}
 		t = t->suivant;
 	}
-    free(t);
+    //free(t);
 	return tMin;
 }
 
