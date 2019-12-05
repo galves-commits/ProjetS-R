@@ -121,7 +121,7 @@ void getRequete(int *connections, int nbserv)
 		nbtrainsAdd +=nbTrains;
 
 		printf("nb train i: %d \n", nbTrains);
-		trains = recupTrain(nbTrains, connections[i], &trains);
+		trains = recupTrain(nbTrains, connections[i], &trains);//surment la le bug
 
 
 	}
