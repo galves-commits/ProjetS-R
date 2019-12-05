@@ -28,12 +28,12 @@ void admin(){
 		if (strcmp(reponse, "admin") == 0){
              CelluleT *req = malloc(sizeof(CelluleT));
 			req=statServer();
-            afficherStat(req);
 			comparaison(req);
 		}
         exit(EXIT_SUCCESS);
 	}
 }
+
 CelluleT * statServer(){
     char str[MaxStr];
     char *s;
@@ -79,6 +79,7 @@ CelluleT * statServer(){
     }
     return req;
 }
+
 CelluleT * remplirStat(char **tab, CelluleT *requete)
 {
 	Stat *s = malloc(sizeof(Stat));
@@ -102,28 +103,6 @@ void inserTete2(CelluleT ** tete, Stat t){
     nouv->suivant = *tete;
     *tete = nouv;
 }
-void afficherStat(CelluleT *stat)
-{
-	CelluleT *t = stat;
-	while (t->suivant!=NULL)
-	{
-        if(strcmp(t->laStat.proto,"TV")==0){
-             printf("%s \t %s \t %s \n",
-				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee);
-        }
-        if(strcmp(t->laStat.proto,"TH")==0){
-            printf("%s \t %s \t %s \t %02d:%02d \n",
-				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee,t->laStat.h1.heure,t->laStat.h1.minute);
-        }
-        if(strcmp(t->laStat.proto,"TB")==0){
-		printf("%s \t %s \t %s \t %02d:%02d \t\t  %02d:%02d \n",
-				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee,t->laStat.h1.heure,t->laStat.h1.minute,t->laStat.h2.heure,t->laStat.h2.minute);
-        }       
-        t = t->suivant;
-	}
-    free(t);
-}
-
 
 void comparaison(CelluleT *stat)
 {
@@ -132,6 +111,17 @@ void comparaison(CelluleT *stat)
 	int nbeTV = 0 ;
 	int nbeTH = 0 ;
 	int nbeTB = 0 ;
+	int nbeVG = 0 ;
+	int nbeVM = 0 ;
+	int nbeVP = 0 ;
+	int nbeGV = 0 ;
+	int nbeMV = 0 ;
+	int nbePV = 0 ;
+	Temps treq;
+	treq.heure=12;
+	treq.minute=00;
+	int matin=0;
+	int soir=0;
 	while (t->suivant!=NULL)
 	{
         if(strcmp(t->laStat.proto,"TV")==0){
@@ -139,43 +129,109 @@ void comparaison(CelluleT *stat)
         }
         if(strcmp(t->laStat.proto,"TH")==0){
             nbeTH ++ ;
+			if (superieur(t->laStat.h1, treq)){
+                 soir++;
+            }else{
+                matin++;
+            }
 		}
         if(strcmp(t->laStat.proto,"TB")==0){
 			nbeTB ++ ;
+			 if (superieur(t->laStat.h1, treq)){
+                 soir++;
+            }else{
+                matin++;
+            }
+            if (superieur(t->laStat.h2, treq)){
+                 soir++;
+            }else{
+                matin++;
+            }	
+        }
+		if(strcmp(t->laStat.villeDepart,"Valence")==0){
+			if(strcmp(t->laStat.villeArrivee,"Grenoble")==0){
+            	nbeVG ++ ;
+			}
+			if(strcmp(t->laStat.villeArrivee,"Montelimar")==0){
+            	nbeVM ++ ;
+        	}
+			if(strcmp(t->laStat.villeArrivee,"Paris Gare de Lyon")==0){
+            	nbeVP ++ ;
+        	} 
+        }
+		if(strcmp(t->laStat.villeDepart,"Grenoble")==0){
+            if(strcmp(t->laStat.villeArrivee,"Valence")==0){
+            	nbeGV ++ ;
+			}
+        }
+		if(strcmp(t->laStat.villeDepart,"Montelimar")==0){
+            if(strcmp(t->laStat.villeArrivee,"Valence")==0){
+            	nbeMV ++ ;
+			}
+        }
+		if(strcmp(t->laStat.villeDepart,"Paris Gare de Lyon")==0){
+            if(strcmp(t->laStat.villeArrivee,"Valence")==0){
+            	nbePV ++ ;
+			}
         }       
 		nbedeReq ++ ;
         t = t->suivant;
 	}
-	double moyTV = moyenne(nbeTV , nbedeReq);
-	double moyTH = moyenne(nbeTH , nbedeReq);
-	double moyTB = moyenne(nbeTB , nbedeReq);
-	int m =max(nbeTB , nbeTH , nbeTV) ;
+	int tr=max(max(max(nbeVG , nbeVM), max(nbeVP, nbeGV)),max(nbeMV,nbePV));
+	int m =max(max(nbeTB , nbeTH) , nbeTV);
+	int h=max(matin,soir);
+	double moyP= moyenne(m, nbedeReq);
+	double moyT= moyenne(tr, nbedeReq);
+	char a='%';
+		printf("Nous avons reçus aujourd'hui %d requêtes\n",nbedeReq);
 		if (m == nbeTV) {
-			printf("Le protocole TV est le plus utilisé avec %d requete sur %d et une moyenne de %0.3f\n " , nbeTV , nbedeReq , moyTV) ;
+			printf("Le protocole TV est le plus utilisé avec %d requete soit une moyenne de %0.3f %c \n" , nbeTV , moyP,a) ;
 		}
 		if (m == nbeTH) {
-			printf("Le protocole TH est le plus utilisé avec %d requete sur %d et une moyenne de %0.3f \n " , nbeTH , nbedeReq , moyTH);
+			printf("Le protocole TH est le plus utilisé avec %d requete soit une moyenne de %0.3f %c \n" , nbeTH , moyP,a);
 		}
 		if (m == nbeTB) {
-			printf("Le protocole TB est le plus utilisé avec %d requete sur %d et une moyenne de %0.3f \n " , nbeTB , nbedeReq , moyTB) ;
+			printf("Le protocole TB est le plus utilisé avec %d requete soit une moyenne de %0.3f %c \n" , nbeTB , moyP,a) ;
 		}
+		if (tr == nbeVG) {
+			printf("Le trajet le plus recherché est Valence --> Grenoble avec %d requete soit une moyenne de %0.3f %c \n" , nbeVG ,  moyT,a) ;
+		}
+		if (tr == nbeVM) {
+			printf("Le trajet le plus recherché est Valence --> Montelimar avec %d requete soit une moyenne de %0.3f %c \n" , nbeVG ,  moyT,a) ;
+		}
+		if (tr == nbeVP) {
+			printf("Le trajet le plus recherché est Valence --> Paris Gare de Lyon avec %d requete soit une moyenne de %0.3f %c \n" , nbeVG ,  moyT,a) ;
+		}
+		if (tr == nbeGV) {
+			printf("Le trajet le plus recherché est Grenoble --> Valence avec %d requete soit une moyenne de %0.3f %c \n" , nbeVG ,  moyT,a) ;
+		}
+		if (tr == nbeMV) {
+			printf("Le trajet le plus recherché est Montelimar --> Valence avec %d requete soit une moyenne de %0.3f %c \n" , nbeVG ,  moyT,a) ;
+		}
+		if (tr == nbePV) {
+			printf("Le trajet le plus recherché est Paris Gare de Lyon --> Valence avec %d requete soit une moyenne de %0.3f %c \n" , nbeVG ,  moyT,a) ;
+		}
+		if (matin==soir){
+			printf("Il y a autant de requêtes le matin que l'après-midi\n");
+		}else{
+			if (h==matin){
+				printf("La majorité des requêtes sont faites le matin\n");
+			}else{
+				printf("La majorité des requêtes sont faites l'après-midi\n");
+		}
+	}
 }
 
 
 double moyenne(int a , int b ) {
 		double c =  (double)a / (double) b  ; 
-		return c ;
+		return c*100 ;
 }
 
-int max(int a , int b , int c ) {
-	int max = 0 ;
- 	if (a>b){
-		max=a;
-	}else{
-		max = b ;
-	}
-	if (c>max){
-		max = c ;
+int max(int a , int b) {
+	int max = a;
+ 	if (b>a){
+		max=b;
 	}
 	return max ;
 }
