@@ -20,4 +20,7 @@ CelluleT * statServer();
 void admin();
 void inserTete2(CelluleT ** tete, Stat t);
 void afficherStat(CelluleT *trains);
+void comparaison(CelluleT *stat) ; 
+double moyenne(int a , int b ) ;
+int max(int a , int b , int c ) ;
 

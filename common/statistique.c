@@ -29,6 +29,7 @@ void admin(){
              CelluleT *req = malloc(sizeof(CelluleT));
 			req=statServer();
             afficherStat(req);
+			comparaison(req);
 		}
         exit(EXIT_SUCCESS);
 	}
@@ -121,4 +122,60 @@ void afficherStat(CelluleT *stat)
         t = t->suivant;
 	}
     free(t);
+}
+
+
+void comparaison(CelluleT *stat)
+{
+	CelluleT *t = stat;
+	int nbedeReq = 0 ;
+	int nbeTV = 0 ;
+	int nbeTH = 0 ;
+	int nbeTB = 0 ;
+	while (t->suivant!=NULL)
+	{
+        if(strcmp(t->laStat.proto,"TV")==0){
+            nbeTV ++ ;
+        }
+        if(strcmp(t->laStat.proto,"TH")==0){
+            nbeTH ++ ;
+		}
+        if(strcmp(t->laStat.proto,"TB")==0){
+			nbeTB ++ ;
+        }       
+		nbedeReq ++ ;
+        t = t->suivant;
+	}
+	double moyTV = moyenne(nbeTV , nbedeReq);
+	double moyTH = moyenne(nbeTH , nbedeReq);
+	double moyTB = moyenne(nbeTB , nbedeReq);
+	int m =max(nbeTB , nbeTH , nbeTV) ;
+		if (m == nbeTV) {
+			printf("Le protocole TV est le plus utilisé avec %d requete sur %d et une moyenne de %0.3f\n " , nbeTV , nbedeReq , moyTV) ;
+		}
+		if (m == nbeTH) {
+			printf("Le protocole TH est le plus utilisé avec %d requete sur %d et une moyenne de %0.3f \n " , nbeTH , nbedeReq , moyTH);
+		}
+		if (m == nbeTB) {
+			printf("Le protocole TB est le plus utilisé avec %d requete sur %d et une moyenne de %0.3f \n " , nbeTB , nbedeReq , moyTB) ;
+		}
+}
+
+
+double moyenne(int a , int b ) {
+		double c =  (double)a / (double) b  ; 
+		return c ;
+}
+
+int max(int a , int b , int c ) {
+	int max = 0 ;
+ 	if (a>b){
+		max=a;
+	}else{
+		max = b ;
+	}
+	if (c>max){
+		max = c ;
+	}
+	return max ;
 }
