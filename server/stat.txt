@@ -1,12 +1,3 @@
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV;Valence;Grenoble
-TV-Valence-Grenoble-
+TB-Valence-Grenoble-06:00-10:00
+TV-Valence-Grenoble-06:00-10:00
+TH-Valence-Grenoble-06:00-10:00TB-Valence-Grenoble-06:00-10:00
