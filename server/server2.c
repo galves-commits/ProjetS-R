@@ -24,7 +24,6 @@ int main(int argc, char *argv[], char *arge[])
 	sin2.sin_addr.s_addr = htonl(INADDR_ANY);
 	bind(ecoute2, (struct sockaddr *)&sin2, sizeof(sin2));
 	listen(ecoute2, 5);
-
 	while (true)
 	{
 		int echange = accept(ecoute2, NULL, NULL);
