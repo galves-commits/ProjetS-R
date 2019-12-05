@@ -80,13 +80,16 @@ CelluleT * statServer(){
 }
 CelluleT * remplirStat(char **tab, CelluleT *requete)
 {
-
-	Stat *s = malloc(sizeof(Stat));;
+	Stat *s = malloc(sizeof(Stat));
 	s->proto = tab[0];
 	s->villeDepart = tab[1];
 	s->villeArrivee = tab[2];
+    if(( strcmp(s->proto,"TH")==0 )||(strcmp(s->proto,"TB")==0)){
 	s->h1 = stringToTemps(tab[3]);
+    }
+    if(strcmp(s->proto,"TB")==0){
 	s->h2 = stringToTemps(tab[4]);
+    }
 	inserTete2(&requete, *s);
 	free(s);
 	return requete;
@@ -103,9 +106,19 @@ void afficherStat(CelluleT *stat)
 	CelluleT *t = stat;
 	while (t->suivant!=NULL)
 	{
+        if(strcmp(t->laStat.proto,"TV")==0){
+             printf("%s \t %s \t %s \n",
+				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee);
+        }
+        if(strcmp(t->laStat.proto,"TH")==0){
+            printf("%s \t %s \t %s \t %02d:%02d \n",
+				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee,t->laStat.h1.heure,t->laStat.h1.minute);
+        }
+        if(strcmp(t->laStat.proto,"TB")==0){
 		printf("%s \t %s \t %s \t %02d:%02d \t\t  %02d:%02d \n",
 				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee,t->laStat.h1.heure,t->laStat.h1.minute,t->laStat.h2.heure,t->laStat.h2.minute);
-                t = t->suivant;
+        }       
+        t = t->suivant;
 	}
     free(t);
 }

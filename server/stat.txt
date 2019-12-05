@@ -1,5 +1,7 @@
-TB-Valence-Grenoble-06:00-10:00
-TV-Valence-Grenoble-06:00-10:00
-TH-Valence-Grenoble-06:00-10:00
-TB-Valence-Grenoble-06:00-10:00
-TB-Valence-Grenoble-06:00-15:00
+TB-Valence-Grenoble-06:15-10:00
+TB-Valence-Grenoble-06:12-10:15
+TH-Valence-Grenoble-04:00
+TB-Valence-Grenoble-06:00-10:18
+TB-Valence-Grenoble-06:50-15:00
+TH-Valence-Grenoble-06:02
+TV-Grenoble-Valence
