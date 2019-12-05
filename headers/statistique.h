@@ -5,8 +5,7 @@ typedef struct Stat
     char *villeArrivee;
     Temps h1;
     Temps h2;
-    double prix;
-    char *reduc;
+
 }Stat;
 
 typedef struct celluleT{
@@ -17,7 +16,8 @@ typedef struct celluleT{
 
 
 CelluleT * remplirStat(char **tab, CelluleT *requete);
-void statServer();
+CelluleT * statServer();
 void admin();
 void inserTete2(CelluleT ** tete, Stat t);
+void afficherStat(CelluleT *trains);
 

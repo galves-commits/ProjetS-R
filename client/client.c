@@ -10,11 +10,15 @@
 
 #include "../headers/trains.h"
 #include "../headers/dialogue.h"
-
+#include "../headers/statistique.h"
 #define MAX 400
 
 int main(int argc, char *argv[], char *arge[])
-{ //serv1
+{ 
+
+	int nbLus;
+	char ans[MAX];
+	admin();
 	int connection = socket(AF_INET, SOCK_STREAM, 0);
 	struct sockaddr_in sin;
 	sin.sin_family = AF_INET;
@@ -23,11 +27,6 @@ int main(int argc, char *argv[], char *arge[])
 	memcpy(&sin.sin_addr.s_addr, host->h_addr_list[0], sizeof(sin.sin_addr.s_addr));
 	int echange;
 	echange = connect(connection, (struct sockaddr *)&sin, sizeof(sin));
-	//serv2
-
-	int nbLus;
-	char ans[MAX];
-	admin();
 	printf("Connexion a un(1) ou plusieurs serveur(2)?\n");
 	fscanf(stdin, "%s", ans);
 	if (strcmp(ans, "1") == 0)

@@ -26,12 +26,14 @@ void admin(){
 		printf("Veuillez indiquer le mot de passe\n");
 		fscanf(stdin, "%s", reponse);
 		if (strcmp(reponse, "admin") == 0){
-			statServer();
+             CelluleT *req = malloc(sizeof(CelluleT));
+			req=statServer();
+            afficherStat(req);
 		}
         exit(EXIT_SUCCESS);
 	}
 }
-void statServer(){
+CelluleT * statServer(){
     char str[MaxStr];
     char *s;
     char stat[MaxStr][NBMaxTrain];
@@ -71,15 +73,16 @@ void statServer(){
             req = remplirStat(tabTrain[a], req);
             
 			a++;
+           
 		}
-	}
+    }
+    return req;
 }
 CelluleT * remplirStat(char **tab, CelluleT *requete)
 {
 
 	Stat *s = malloc(sizeof(Stat));;
 	s->proto = tab[0];
-    printf("%s\n",s->proto);
 	s->villeDepart = tab[1];
 	s->villeArrivee = tab[2];
 	s->h1 = stringToTemps(tab[3]);
@@ -91,7 +94,18 @@ CelluleT * remplirStat(char **tab, CelluleT *requete)
 
 void inserTete2(CelluleT ** tete, Stat t){
     CelluleT *nouv = malloc(sizeof(CelluleT));
-    nouv->laStat;
+    nouv->laStat=t;
     nouv->suivant = *tete;
     *tete = nouv;
+}
+void afficherStat(CelluleT *stat)
+{
+	CelluleT *t = stat;
+	while (t->suivant!=NULL)
+	{
+		printf("%s \t %s \t %s \t %02d:%02d \t\t  %02d:%02d \n",
+				t->laStat.proto,t->laStat.villeDepart,t->laStat.villeArrivee,t->laStat.h1.heure,t->laStat.h1.minute,t->laStat.h2.heure,t->laStat.h2.minute);
+                t = t->suivant;
+	}
+    free(t);
 }
