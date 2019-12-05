@@ -140,28 +140,30 @@ double getReduc(Train t){
     return prix;
 }
 
-Train trierParPrix(Cellule *trains)
+Train trierParPrix(Cellule *trains,int nbtrains)
 {
 	Train tMin = trains->leTrain;
 	Cellule *t = trains;
-	while (t->leTrain.numero != 0)
+    int i = 0;
+	while (i<nbtrains)
 	{
 		if (t->leTrain.prix < tMin.prix)
 		{
 			tMin = t->leTrain;
 		}
 		t = t->suivant;
+        i++;
 	}
-    //free(t);
 	return tMin;
 }
 
 
-Train trierParTemps(Cellule *trains)
+Train trierParTemps(Cellule *trains,int nbtrains)
 {
 	Train tMin = trains->leTrain;
 	Cellule *t = trains;
-	while (t->leTrain.numero != 0)
+    int i = 0;
+	while (i< nbtrains)
 	{
 
 		if (inferieur(dureeVoy(t->leTrain), dureeVoy(tMin)))
@@ -169,19 +171,20 @@ Train trierParTemps(Cellule *trains)
 			tMin = t->leTrain;
 		}
 		t = t->suivant;
+        i++;
 	}
-    //free(t);
 	return tMin;
 }
 
 
-void afficherTrains(char* message,Cellule *trains)
+void afficherTrains(char* message,Cellule *trains,int nbtrains)
 {
 	Cellule *t = trains;
+    int i = 0;
 
 	printf( "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
 
-	while (t->leTrain.numero != 0)
+	while (i<nbtrains)
 	{
 		printf("%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€\n",
 				t->leTrain.numero, t->leTrain.villeDepart, t->leTrain.villeArrivee,
@@ -189,6 +192,7 @@ void afficherTrains(char* message,Cellule *trains)
 				t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,
 				t->leTrain.prix);
 		t = t->suivant;
+        i++;
 	}
     free(t);
 }
