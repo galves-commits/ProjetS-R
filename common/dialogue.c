@@ -33,10 +33,9 @@ void reponseRequete(Cellule *trains, int echange, int nbtrains)
 	}
 }
 
-Cellule *recupTrain(int nbTrains, int connection)
+Cellule *recupTrain(int nbTrains, int connection, Cellule *trains )
 {
 	int i = 0;
-	Cellule *trains = malloc(sizeof(Cellule));
 
 	while (i < nbTrains)
 	{
@@ -63,6 +62,7 @@ Cellule *recupTrain(int nbTrains, int connection)
 		t->heureDep = stringToTemps(h1);
 
 		inserTete(&trains, *t);
+		free(t);
 		i++;
 	}
 	return trains;
@@ -151,7 +151,8 @@ void getRequete(int connection)
 	}
 	else
 	{
-		Cellule *trains = recupTrain(nbTrains, connection);
+		Cellule *trains = malloc(sizeof(Cellule));
+		trains = recupTrain(nbTrains, connection,trains);
 		afficherTrains("Trains disponible", trains);
 		if (nbTrains > 1)
 		{
@@ -190,7 +191,9 @@ void getRequete2(int connection, int connection2)
 	nbLus = read(connection2, tampon2, MAX);
 	int nbTrains = atoi(tampon);
 	int nbTrains2 = atoi(tampon2);
-		;
+
+	printf("nb : %d : %d\n", nbTrains,nbTrains2);
+
 
 	if ((nbTrains == 0) && (nbTrains2 == 0))
 	{
@@ -198,9 +201,11 @@ void getRequete2(int connection, int connection2)
 	}
 	else
 	{	
-		Cellule *trains = recupTrain(nbTrains, connection);
+		Cellule *trains = malloc(sizeof(Cellule));
+		trains = recupTrain(nbTrains, connection,trains);
 		
-		Cellule *trains2 = recupTrain(nbTrains2, connection2);
+		trains = recupTrain(nbTrains2, connection2,trains);
+		printf("test %d\n", trains->leTrain.numero);
 		
 		if (nbTrains+nbTrains2 > 1)
 		{
@@ -209,26 +214,18 @@ void getRequete2(int connection, int connection2)
 			fscanf(stdin, "%s", ans);
 			if (strcmp(ans, "R") == 0)
 			{
+				printf("test2 %d\n", trains->leTrain.numero);
+
 				Cellule *tMin = malloc(sizeof(Cellule));
 				Train t1 = trierParTemps(trains);
-				Train t2= trierParTemps(trains2);
-				Train t=t2;
-				if (inferieur(dureeVoy(t1),dureeVoy(t2))){
-					t=t1;
-				}
-				inserTete(&tMin, t);
+				inserTete(&tMin, t1);
 				afficherTrains("Le train le plus rapide est", tMin);
 			}
 			if (strcmp(ans, "P") == 0)
 			{
 				Train t1 = trierParPrix(trains);
-				Train t2= trierParPrix(trains2);
-				Train t=t2;
-				if (t1.prix<t2.prix){
-					t=t1;
-				}
 				Cellule *tMinprix = malloc(sizeof(Cellule));
-				inserTete(&tMinprix, t);
+				inserTete(&tMinprix, t1);
 				afficherTrains("Le train le moins cher est", tMinprix);
 			}
 			if (strcmp(ans, "Q") == 0)

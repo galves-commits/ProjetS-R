@@ -75,5 +75,6 @@ Cellule * remplirStruc(char **tab, Cellule *trains)
 	t->prix = ret;
 	t->reduc = tab[6];
 	inserTete(&trains, *t);
+	free(t);
 	return trains;
 }

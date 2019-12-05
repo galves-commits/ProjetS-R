@@ -43,6 +43,7 @@ Cellule * getTVTrains(char *depart, char *arrivee, Cellule *trains,int *nbtrains
         }
         t = t->suivant;
     }
+    free(t);
     *nbtrains = i;
     return bonTrains;
 
@@ -70,6 +71,7 @@ Cellule * getTHTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
         }
         t = t->suivant;
     }
+    free(t);
     *nbtrains = i;
     return bonTrains;
 }
@@ -86,8 +88,7 @@ Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
     *hDebReq = stringToTemps(h1);
     Temps *hFinReq = malloc(sizeof(Temps));  
     *hFinReq = stringToTemps(h2);
-        printf("Bob\n");
-
+    printf("Bob\n");
 
     while (t->suivant != NULL)
     {
@@ -107,6 +108,9 @@ Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
         }
         t = t->suivant;
     }
+    free(t);
+    free(hDebReq);
+    free(hFinReq);
     *nbtrains = i;
     return bonTrains;
 }
@@ -117,7 +121,6 @@ Temps dureeVoy(Train t)
     int tArrMin = t.heureArr.heure * 60 + t.heureArr.minute;
     int durre = tArrMin - tDepMin;
     Temps *dure = malloc(sizeof(Temps));
-    ;
     dure->heure = durre / 60;
     dure->minute = durre % 60;
     return *dure;
@@ -149,6 +152,7 @@ Train trierParPrix(Cellule *trains)
 		}
 		t = t->suivant;
 	}
+    //free(t);
 	return tMin;
 }
 
@@ -166,6 +170,7 @@ Train trierParTemps(Cellule *trains)
 		}
 		t = t->suivant;
 	}
+    //free(t);
 	return tMin;
 }
 
@@ -185,4 +190,5 @@ void afficherTrains(char* message,Cellule *trains)
 				t->leTrain.prix);
 		t = t->suivant;
 	}
+    free(t);
 }
