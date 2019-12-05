@@ -1,8 +1,8 @@
+#define PORT 7770
+
 void reponseRequete(Cellule *, int, int);
-void sendRequete(int );
-void sendRequete2(int connection, int connection2);
-void getRequete(int);
-void getRequete2(int connection, int connection2);
+void sendRequete(int *, int);
+void getRequete(int *, int);
 Cellule *recupTrain(int, int,Cellule**);
 void admin();
 void statServer();
