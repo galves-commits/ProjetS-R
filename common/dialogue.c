@@ -33,7 +33,7 @@ void reponseRequete(Cellule *trains, int echange, int nbtrains)
 	}
 }
 
-Cellule *recupTrain(int nbTrains, int connection, Cellule *trains )
+Cellule *recupTrain(int nbTrains, int connection, Cellule **trains )
 {
 	int i = 0;
 
@@ -61,11 +61,11 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule *trains )
 		t->heureArr = stringToTemps(h2);
 		t->heureDep = stringToTemps(h1);
 
-		inserTete(&trains, *t);
+		inserTete(trains, *t);
 		free(t);
 		i++;
 	}
-	return trains;
+	return *trains;
 }
 
 void sendRequete(int connection)
@@ -152,8 +152,10 @@ void getRequete(int connection)
 	else
 	{
 		Cellule *trains = malloc(sizeof(Cellule));
-		trains = recupTrain(nbTrains, connection,trains);
+		trains = recupTrain(nbTrains, connection,&trains);
+
 		afficherTrains("Trains disponible", trains);
+
 		if (nbTrains > 1)
 		{
 			char ans[MAX];
@@ -201,11 +203,10 @@ void getRequete2(int connection, int connection2)
 	}
 	else
 	{	
-		Cellule *trains = malloc(sizeof(Cellule));
-		trains = recupTrain(nbTrains, connection,trains);
+		Cellule *trains = {0};
+		trains = recupTrain(nbTrains, connection,&trains);
 		
-		trains = recupTrain(nbTrains2, connection2,trains);
-		printf("test %d\n", trains->leTrain.numero);
+		trains = recupTrain(nbTrains2, connection2,&trains);
 		
 		if (nbTrains+nbTrains2 > 1)
 		{
@@ -214,8 +215,6 @@ void getRequete2(int connection, int connection2)
 			fscanf(stdin, "%s", ans);
 			if (strcmp(ans, "R") == 0)
 			{
-				printf("test2 %d\n", trains->leTrain.numero);
-
 				Cellule *tMin = malloc(sizeof(Cellule));
 				Train t1 = trierParTemps(trains);
 				inserTete(&tMin, t1);

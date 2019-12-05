@@ -144,7 +144,7 @@ Train trierParPrix(Cellule *trains)
 {
 	Train tMin = trains->leTrain;
 	Cellule *t = trains;
-	while (t->suivant != NULL)
+	while (t->leTrain.numero != 0)
 	{
 		if (t->leTrain.prix < tMin.prix)
 		{
@@ -161,7 +161,7 @@ Train trierParTemps(Cellule *trains)
 {
 	Train tMin = trains->leTrain;
 	Cellule *t = trains;
-	while (t->suivant != NULL)
+	while (t->leTrain.numero != 0)
 	{
 
 		if (inferieur(dureeVoy(t->leTrain), dureeVoy(tMin)))
@@ -181,7 +181,7 @@ void afficherTrains(char* message,Cellule *trains)
 
 	printf( "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
 
-	while (t->suivant != NULL)
+	while (t->leTrain.numero != 0)
 	{
 		printf("%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€\n",
 				t->leTrain.numero, t->leTrain.villeDepart, t->leTrain.villeArrivee,

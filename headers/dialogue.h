@@ -3,4 +3,4 @@ void sendRequete(int );
 void sendRequete2(int connection, int connection2);
 void getRequete(int);
 void getRequete2(int connection, int connection2);
-Cellule *recupTrain(int, int,Cellule*);
+Cellule *recupTrain(int, int,Cellule**);
