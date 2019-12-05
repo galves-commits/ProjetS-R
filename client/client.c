@@ -27,10 +27,12 @@ int main(int argc, char *argv[], char *arge[])
 
 	int nbLus;
 	char ans[MAX];
+	admin();
 	printf("Connexion a un(1) ou plusieurs serveur(2)?\n");
 	fscanf(stdin, "%s", ans);
 	if (strcmp(ans, "1") == 0)
 	{
+		
 		sendRequete(connection);
 		getRequete(connection);
 	}
