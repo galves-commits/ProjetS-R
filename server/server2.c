@@ -14,20 +14,20 @@
 
 int main(int argc, char *argv[], char *arge[])
 {
-	Cellule *trains = traiterFic("train.txt");
+	Cellule *trains = traiterFic("train2.txt");
 	printf("Runing\n");
 
-	int ecoute = socket(AF_INET, SOCK_STREAM, 0);
-	struct sockaddr_in sin;
-	sin.sin_family = AF_INET;
-	sin.sin_port = htons(7777);
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);
-	bind(ecoute, (struct sockaddr *)&sin, sizeof(sin));
-	listen(ecoute, 5);
+	int ecoute2 = socket(AF_INET, SOCK_STREAM, 0);
+	struct sockaddr_in sin2;
+	sin2.sin_family = AF_INET;
+	sin2.sin_port = htons(7778);
+	sin2.sin_addr.s_addr = htonl(INADDR_ANY);
+	bind(ecoute2, (struct sockaddr *)&sin2, sizeof(sin2));
+	listen(ecoute2, 5);
 
 	while (true)
 	{
-		int echange = accept(ecoute, NULL, NULL);
+		int echange = accept(ecoute2, NULL, NULL);
 		pid_t pid = fork();
 		switch (pid)
 		{
