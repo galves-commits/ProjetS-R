@@ -1,0 +1,21 @@
+17464;Valence;Grenoble;6:17;7:31;17.60;REDUC
+17466;Valence;Grenoble;6:47;7:55;17.60;
+17468;Valence;Grenoble;7:15;8:30;17.50;
+17424;Grenoble;Valence;16:30;17:28;17.60;
+17425;Grenoble;Valence;16:55;17:45;17.60;SUPPL
+17426;Grenoble;Valence;17:30;18:46;17.10;
+17428;Grenoble;Valence;18:30;20:45;15.60;REDUC
+86081;Valence;Montelimar;12:32;12:50;9.80;REDUC
+86083;Valence;Montelimar;14:10;14:50;6.80;SUPPL
+86087;Valence;Montelimar;16:30;16:58;9.80;
+86074;Montelimar;Valence;6:30;6:58;9.80;
+86075;Montelimar;Valence;7:10;7:25;9.80;SUPPL
+86077;Montelimar;Valence;7:10;7:43;9.80;
+86078;Montelimar;Valence;8:00;8:28;9.80;
+86079;Montelimar;Valence;8:30;9:00;7.80;REDUC
+9842;Valence;Paris Gare de Lyon;15:15;17:50;109.50;REDUC
+6154;Valence;Paris Gare de Lyon;16:15;19:16;92.00;
+6268;Valence;Paris Gare de Lyon;17:15;20:30;60.80;
+6135;Paris Gare de Lyon;Valence;7:40;10:11;113.00;REDUC
+9714;Paris Gare de Lyon;Valence;10:07;12:01;90.00;
+6064;Paris Gare de Lyon;Valence;10:07;14:15;70.20;
