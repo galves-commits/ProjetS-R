@@ -26,9 +26,48 @@ void admin(){
 		fscanf(stdin, "%s", reponse);
 		if (strcmp(reponse, "admin") == 0){
 			statServer();
-		}	
+		}
+        exit(EXIT_SUCCESS);
 	}
 }
 void statServer(){
+    char str[MaxStr];
+    char *s;
+    char stat[MaxStr][NBMaxTrain];
+    FILE *file = fopen("../server/stat.txt", "r");
+    int i = 0;
+   
+    if (file != NULL)
+	{       
 
+		while (fgets(str, NBMax, file) != NULL)
+		{
+			s = strchr(str, '\n');
+			if (s != 0)
+			{
+				*s = '\0';
+			}
+			strcpy(stat[i], str);
+			i++;
+            
+		}
+		fclose(file);
+		int a = 0;
+
+		while (a < i)
+		{
+			int y = 1;
+			char *tabTrain[MaxVille][MaxStr];
+			char *p;
+			p = strtok(stat[a], "-");
+			tabTrain[a][0] = p;
+			while (y < 100 && tabTrain[a][y - 1] != NULL)
+			{
+				p = strtok(NULL, "-"); 
+				tabTrain[a][y] = p;
+				y++;
+			}
+			a++;
+		}
+	}
 }
