@@ -14,7 +14,7 @@
 
 int main(int argc, char *argv[], char *arge[])
 {
-	Cellule *trains = traiterFic();
+	Cellule *trains = traiterFic("train.txt");
 	printf("Runing\n");
 
 	int ecoute = socket(AF_INET, SOCK_STREAM, 0);

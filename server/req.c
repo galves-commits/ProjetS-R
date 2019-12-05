@@ -17,14 +17,14 @@
 #define MaxStr 100
 #define MaxVille 100
 
-Cellule * traiterFic()
+Cellule * traiterFic(char* t)
 {
 	char ligneActuel[NBMaxTrain][NBMax];
 	char *s;
 	int i = 0;
 	Cellule *trains = malloc(sizeof(Cellule));
 	char str[MaxStr];
-	FILE *file = fopen("train.txt", "r");
+	FILE *file = fopen(t, "r");
 	if (file != NULL)
 	{
 		while (fgets(str, NBMax, file) != NULL)

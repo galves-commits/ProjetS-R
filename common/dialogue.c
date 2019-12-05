@@ -17,7 +17,6 @@ void reponseRequete(Cellule *trains, int echange, int nbtrains)
 	char reponse[10];
 	sprintf(reponse, "%d\n", nbtrains);
 	write(echange, reponse, sizeof(reponse));
-
 	while (trains->suivant != NULL)
 	{
 		char chaine[MAX];
@@ -100,6 +99,42 @@ void sendRequete(int connection)
 		sprintf(reponse, "%s;%s;%s;%s\n", req, dep, arr, hor);
 	}
 	write(connection, reponse, strlen(reponse) + 1);
+
+}
+
+void sendRequete2(int connection, int connection2)
+{
+	char hor[MAX];
+	char reponse[MAX];
+	char req[MAX];
+	char dep[MAX];
+	char arr[MAX];
+
+	printf("Recherche avec ville seul(TV), avec une horraire (TH), avec deux horraires(TB) ? ");
+	fscanf(stdin, "%s", req);
+	printf("Ville de départ : ");
+	fscanf(stdin, "%s;", dep);
+	printf("Ville d'arrivé : ");
+	fscanf(stdin, "%s", arr);
+	if (strcmp(req, "TV") == 0)
+	{
+		sprintf(reponse, "%s;%s;%s\n", req, dep, arr);
+	}
+	if (strcmp(req, "TH") == 0)
+	{
+		printf("Horraire (XX:XX): ");
+		fscanf(stdin, "%s", hor);
+		sprintf(reponse, "%s;%s;%s;%s\n", req, dep, arr, hor);
+	}
+	if (strcmp(req, "TB") == 0)
+	{
+		printf("Horraire (XX:XX-XX:XX) : ");
+		fscanf(stdin, "%s", hor);
+		sprintf(reponse, "%s;%s;%s;%s\n", req, dep, arr, hor);
+	}
+	write(connection, reponse, strlen(reponse) + 1);
+	write(connection2, reponse, strlen(reponse) + 1);
+
 }
 
 void getRequete(int connection)
@@ -133,6 +168,65 @@ void getRequete(int connection)
 			if (strcmp(ans, "P") == 0)
 			{
 				Train t = trierParPrix(trains);
+				Cellule *tMinprix = malloc(sizeof(Cellule));
+				inserTete(&tMinprix, t);
+				afficherTrains("Le train le moins cher est", tMinprix);
+			}
+			if (strcmp(ans, "Q") == 0)
+			{
+				close(connection);
+				exit(EXIT_SUCCESS);
+			}
+		}
+	}
+}
+
+void getRequete2(int connection, int connection2)
+{
+	int nbLus;
+	char tampon[MAX];
+	char tampon2[MAX];
+	nbLus = read(connection, tampon, MAX);
+	nbLus = read(connection2, tampon2, MAX);
+	int nbTrains = atoi(tampon);
+	int nbTrains2 = atoi(tampon2);
+		;
+
+	if ((nbTrains == 0) && (nbTrains2 == 0))
+	{
+		printf("Aucun trains disponible\n");
+	}
+	else
+	{	
+		Cellule *trains = recupTrain(nbTrains, connection);
+		
+		Cellule *trains2 = recupTrain(nbTrains2, connection2);
+		
+		if (nbTrains+nbTrains2 > 1)
+		{
+			char ans[MAX];
+			printf("Voulez vous le trajet le plus rapide(R) ? Le moins cher(P) ? Q pour quitter\n");
+			fscanf(stdin, "%s", ans);
+			if (strcmp(ans, "R") == 0)
+			{
+				Cellule *tMin = malloc(sizeof(Cellule));
+				Train t1 = trierParTemps(trains);
+				Train t2= trierParTemps(trains2);
+				Train t=t2;
+				if (inferieur(dureeVoy(t1),dureeVoy(t2))){
+					t=t1;
+				}
+				inserTete(&tMin, t);
+				afficherTrains("Le train le plus rapide est", tMin);
+			}
+			if (strcmp(ans, "P") == 0)
+			{
+				Train t1 = trierParPrix(trains);
+				Train t2= trierParPrix(trains2);
+				Train t=t2;
+				if (t1.prix<t2.prix){
+					t=t1;
+				}
 				Cellule *tMinprix = malloc(sizeof(Cellule));
 				inserTete(&tMinprix, t);
 				afficherTrains("Le train le moins cher est", tMinprix);

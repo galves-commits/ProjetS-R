@@ -152,6 +152,7 @@ Train trierParPrix(Cellule *trains)
 	return tMin;
 }
 
+
 Train trierParTemps(Cellule *trains)
 {
 	Train tMin = trains->leTrain;
