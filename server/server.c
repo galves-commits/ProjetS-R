@@ -73,8 +73,7 @@ void requeteTrajet(int echange, Cellule *trains)
 
 	//decomposition de la requete
 	sscanf(req, "%[^;\n];%[^;\n];%[^;\n];%[^;\n]", protocole, villeD, villeA, heure);
-	printf("%s", req);
-	printf("'%d';'%s';'%s';'%s';'%s'\n", nblus, protocole, villeD, villeA, heure);
+
 
 	//Verification du protocol utilisé
 	if (strcmp(protocole, "TV") == 0 || strcmp(protocole, "TH") == 0 || strcmp(protocole, "TB") == 0)

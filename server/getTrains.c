@@ -13,7 +13,7 @@
 #include "../headers/dialogue.h"
 Cellule *getTrains(char *protocol, char *depart, char *arrivee, char *heure, Cellule *trains, int *nbtrains)
 {
-    printf("Requete : %s : %s : %s\n", protocol, depart, arrivee);
+ 
     FILE *fil = fopen("stat.txt", "a");                              //ouverture de stat.txt en mode ecriture a la fin du fichier
     fprintf(fil, "%s-%s-%s-%s\n", protocol, depart, arrivee, heure); // on met la requete du client sous cette forme dans le fichier
     fclose(fil);                                                     // fermeture du fichier
@@ -98,7 +98,6 @@ Cellule *getTBTrains(char *depart, char *arrivee, char *heure, Cellule *trains, 
     char h1[MAX];
     char h2[MAX];
     sscanf(heure, "%[^-]-%[^-]", h1, h2); //recupere la plage horraire du client et la sépart en 2horraire
-    printf("'%s' '%s'\n", h1, h2);
     Temps *hDebReq = malloc(sizeof(Temps));
     *hDebReq = stringToTemps(h1); // convertit la première horraire en structure Temps
     Temps *hFinReq = malloc(sizeof(Temps));
