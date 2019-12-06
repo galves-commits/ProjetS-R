@@ -89,14 +89,14 @@ void makeRequete(char **reponse)
 	}
 	printf(PURPLE "Ville de départ : ");
 	printf(DEFAULT);
+
 	setbuf(stdin, NULL);
 	fgets(dep, sizeof(dep), stdin);
-	char *s = strchr(dep, '\n'); //strchr chervher l'occurence de retour a la ligne
+	char *s = strchr(dep, '\n'); //strchr chercher l'occurence de retour a la ligne
 	if (s != 0)
 	{
 		*s = '\0';
 	}
-	printf("'%s'\n", dep);
 
 	while ((strcmp(dep, "Valence") != 0) && (strcmp(dep, "Grenoble") != 0) && (strcmp(dep, "Montelimar") != 0) && (strcmp(dep, "Paris Gare de Lyon") != 0))
 	{
@@ -115,7 +115,6 @@ void makeRequete(char **reponse)
 	{
 		*s = '\0';
 	}
-	printf("'%s'\n", arr);
 
 	while ((strcmp(arr, "Valence") != 0) && (strcmp(arr, "Grenoble") != 0) && (strcmp(arr, "Montelimar") != 0) && (strcmp(arr, "Paris Gare de Lyon") != 0))
 	{
@@ -150,9 +149,6 @@ void makeRequete(char **reponse)
 	}
 }
 
-void readSTDIN(char **dep)
-{
-}
 
 Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 {

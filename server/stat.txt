@@ -77,3 +77,10 @@ TH-Valence-Grenoble-06:00
 TH-Valence-Grenoble-06:00
 TH-Valence-Grenoble-06:00
 >>>>>>> 3f33e49ae29aa23246a56d6a3cf8160909c28c7b
+TH-Valence-Grenoble-12:00
+TH-Valence-Grenoble-12:00
+TH-Valence-Grenoble-12:00
+TH-Valence-Paris Gare de Lyon-00:00
+TH-Valence-Paris Gare de Lyon-00:00
+TV-Valence-Paris Gare de Lyon-12
+TV-Valence-Paris Gare de Lyon-12
