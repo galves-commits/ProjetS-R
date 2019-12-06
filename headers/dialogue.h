@@ -6,4 +6,4 @@ Cellule *getRequete(int, Cellule **, int *);
 void printRequete(int nbserv, Cellule * trains, int nbtrains);
 Cellule * recupTrain(int , int , Cellule **);
 void admin();
-void statServer();
+

@@ -10,7 +10,7 @@
 
 #include "../headers/trains.h"
 #include "../headers/dialogue.h"
-
+#include "../headers/statistique.h"
 #define MAX 400
 
 int main(int argc, char *argv[], char *arge[])
