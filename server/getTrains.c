@@ -75,7 +75,7 @@ Cellule * getTHTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
     }
     free(t);
     Cellule * retour = malloc(sizeof(Cellule));
-    inserTete(&retour,trierDepart(bonTrains,i));
+    inserTete(&retour,trierDepart(bonTrains,i));// met dans la liste chainée le train le plus proche de l'horraire
     *nbtrains = 1;
     return retour;
 }
@@ -180,6 +180,7 @@ Train trierParTemps(Cellule *trains,int nbtrains)
 	return tMin;
 }
 
+// renvoie le train qui a son départ le plus tot parmis la liste de train donné
 Train trierDepart(Cellule *trains,int nbtrains)
 {
 	Cellule * minDepart =  malloc(sizeof(Cellule));
@@ -199,7 +200,7 @@ Train trierDepart(Cellule *trains,int nbtrains)
 	return tMin;
 }
 
-
+// affiche les trains qui satisfont la requete du client
 void afficherTrains(char* message,Cellule *trains,int nbtrains)
 {
 	Cellule *t = trains;

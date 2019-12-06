@@ -15,7 +15,7 @@
 #define TRUE 1
 #define FALSE 0
 
-
+// transforme une horraire de la forme XX:XX en structure Temps
 Temps stringToTemps(char *heure)
 {
     Temps *h = malloc(sizeof(Temps));
@@ -24,6 +24,7 @@ Temps stringToTemps(char *heure)
     return *h;
 }
 
+// compare 2 structure temps et renvoie vrai si la premiere est inf a la deuxieme
 int inferieur(Temps t1, Temps t2)
 {
     int t1min = t1.heure * 60 + t1.minute;
@@ -32,6 +33,7 @@ int inferieur(Temps t1, Temps t2)
     return t1min <= t2min;
 }
 
+// compare 2 structure temps et renvoie vrai si la premiere est supp a la deuxieme
 int superieur(Temps t1, Temps t2)
 {
     int t1min = t1.heure * 60 + t1.minute;
