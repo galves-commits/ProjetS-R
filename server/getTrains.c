@@ -11,7 +11,7 @@
 
 #include "../headers/trains.h"
 #include "../headers/server.h"
-
+#include "../headers/dialogue.h"
 Cellule * getTrains(char* protocol, char *depart, char *arrivee, char *heure, Cellule *trains, int* nbtrains)
 {
     printf("Requete : %s : %s : %s\n",protocol, depart, arrivee);
@@ -185,15 +185,13 @@ void afficherTrains(char* message,Cellule *trains,int nbtrains)
 	Cellule *t = trains;
     int i = 0;
 
-	printf( "%s : \n  N \t\tDepart \t\t   Arrivee\t\tHeure D \t Heure A \t  Prix\n",message);
+	printf( "%s : \n",message);
 
 	while (i<nbtrains)
 	{
-		printf("%d;%20s;%20s;%02d:%02d;%02d:%02d;%3.2f€\n",
-				t->leTrain.numero, t->leTrain.villeDepart, t->leTrain.villeArrivee,
-				t->leTrain.heureDep.heure, t->leTrain.heureDep.minute,
-				t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,
-				t->leTrain.prix);
+		printf(PURPLE"Train n° : %d | Départ (%02d:%02d) : %s | Arrivé (%02d:%02d) : %s | Prix : %3.2f€\n",
+				t->leTrain.numero, t->leTrain.heureDep.heure, t->leTrain.heureDep.minute,t->leTrain.villeDepart,
+                t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,t->leTrain.villeArrivee,t->leTrain.prix);	
 		t = t->suivant;
         i++;
 	}
