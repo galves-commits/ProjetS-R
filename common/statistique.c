@@ -22,11 +22,23 @@ void admin(){
 	printf(PURPLE"Accès Administration("YELLOW"A"PURPLE") ou Client("YELLOW"C"PURPLE") ?\n");
 	printf(YELLOW);
 	fscanf( stdin, "%s", reponse);
+	while(strcmp(reponse, "A")&&strcmp(reponse, "C")){
+		printf("Veuillez rentrer un caractère correcte\n");
+		printf(PURPLE"Accès Administration("YELLOW"A"PURPLE") ou Client("YELLOW"C"PURPLE") ?\n");
+		printf(YELLOW);
+		fscanf( stdin, "%s", reponse);
+	}
 	if (strcmp(reponse, "A") == 0)
 	{
 		printf(PURPLE"Veuillez indiquer le mot de passe\n");
 		printf(YELLOW);
 		fscanf(stdin,"%s", reponse);
+		while(strcmp(reponse, "admin")){
+			printf(RED"Mot de passe incorrect\n");
+			printf(PURPLE"Veuillez indiquer le mot de passe\n");
+			printf(YELLOW);
+			fscanf(stdin,"%s", reponse);
+		}
 		if (strcmp(reponse, "admin") == 0){
              CelluleT *req = malloc(sizeof(CelluleT));
 			req=statServer();
