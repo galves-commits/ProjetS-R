@@ -19,6 +19,7 @@
 #define BOLDCYAN "\033[1;36m"
 #define WHITE "\033[37m"
 
+void readSTDIN(char **dep);
 void reponseRequete(Cellule *, int, int);
 void makeRequete(char **);
 Cellule *getRequete(int, Cellule **, int *);

@@ -78,11 +78,11 @@ void makeRequete(char **reponse)
 	char arr[MAX];
 	char rep[MAX];
 
-	printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" 
-	YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
+	printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
 	printf(YELLOW);
 	fscanf(stdin, "%s", req);
-	while ((strcmp(req, "TV") != 0)&&(strcmp(req, "TH") != 0)&&(strcmp(req, "TH") != 0)){
+	while ((strcmp(req, "TV") != 0) && (strcmp(req, "TH") != 0) && (strcmp(req, "TH") != 0))
+	{
 		printf("Veuillez écrire un protocol correct\n");
 		printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
 		printf(YELLOW);
@@ -90,8 +90,17 @@ void makeRequete(char **reponse)
 	}
 	printf(PURPLE "Ville de départ : ");
 	printf(DEFAULT);
-	fscanf(stdin, "%s;", dep);
-	while ((strcmp(dep, "Valence") != 0)&&(strcmp(req, "Grenoble") != 0)&&(strcmp(req, "Montelimar") != 0)&&(strcmp(req, "Paris Gare de Lyon") != 0)){
+	setbuf(stdin, NULL);
+	fgets(dep, sizeof(dep), stdin);
+	char *s = strchr(dep, '\n'); //strchr chervher l'occurence de retour a la ligne
+	if (s != 0)
+	{
+		*s = '\0';
+	}
+	printf("'%s'\n", dep);
+
+	while ((strcmp(dep, "Valence") != 0) && (strcmp(dep, "Grenoble") != 0) && (strcmp(dep, "Montelimar") != 0) && (strcmp(dep, "Paris Gare de Lyon") != 0))
+	{
 		printf("Veuillez vérifier l'orthographe, nous ne prenons pas ne charge cette ville\n");
 		printf(PURPLE "Ville de départ : ");
 		printf(DEFAULT);
@@ -99,15 +108,26 @@ void makeRequete(char **reponse)
 	}
 	printf(PURPLE "Ville d'arrivé : ");
 	printf(DEFAULT);
-	fscanf(stdin, "%s", arr);
-	while ((strcmp(arr, "Valence") != 0)&&(strcmp(arr, "Grenoble") != 0)&&(strcmp(arr, "Montelimar") != 0)&&(strcmp(arr, "Paris Gare de Lyon") != 0)){
+
+	setbuf(stdin, NULL);
+	fgets(arr, sizeof(arr), stdin);
+	s = strchr(arr, '\n'); //strchr chervher l'occurence de retour a la ligne
+	if (s != 0)
+	{
+		*s = '\0';
+	}
+	printf("'%s'\n", arr);
+
+	while ((strcmp(arr, "Valence") != 0) && (strcmp(arr, "Grenoble") != 0) && (strcmp(arr, "Montelimar") != 0) && (strcmp(arr, "Paris Gare de Lyon") != 0))
+	{
 		printf("Veuillez vérifier l'orthographe, nous ne prenons pas ne charge cette ville\n");
 		printf(PURPLE "Ville d'arrivé : ");
 		printf(DEFAULT);
 		fscanf(stdin, "%s;", arr);
 	}
-	if (strcmp(arr,dep) == 0){
-	
+	if (strcmp(arr, dep) == 0)
+	{
+
 		printf("Vous avez indiqué la même ville de départ de d'arrivé veuillez recommencer");
 		exit(EXIT_SUCCESS);
 	}
@@ -131,6 +151,10 @@ void makeRequete(char **reponse)
 	}
 }
 
+void readSTDIN(char **dep)
+{
+}
+
 Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 {
 	int nbLus;
@@ -141,10 +165,13 @@ Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 	*nbtrains = atoi(tampon);
 
 	//cas ou le mauvais protocole a été selectionné
-	if(*nbtrains==-1){
-		printf(RED"Erreur : protocole invalide\n");
+	if (*nbtrains == -1)
+	{
+		printf(RED "Erreur : protocole invalide\n");
 		exit(EXIT_SUCCESS);
-	}else{
+	}
+	else
+	{
 		//recuperation des trains
 		recupTrain(*nbtrains, connection, trains);
 	}
@@ -156,7 +183,7 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 	{
 
 	case 0:
-		printf(CYAN "Il n'y a aucun train qui repond à vos attentes\n"DEFAULT);
+		printf(CYAN "Il n'y a aucun train qui repond à vos attentes\n" DEFAULT);
 		break;
 
 	case 1:
@@ -170,14 +197,13 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 		}
 		else
 		{
-			printf(CYAN "Il y a %d trains disponible.\n"DEFAULT, nbtrains);
+			printf(CYAN "Il y a %d trains disponible.\n" DEFAULT, nbtrains);
 		}
 
 		if (nbtrains > 1)
 		{
 			char ans[MAX];
-			printf(CYAN "Voulez vous le trajet le plus rapide(" YELLOW "R" CYAN ") ? Le moins cher(" 
-			YELLOW "P" CYAN ") ? " YELLOW "Q" CYAN " pour quitter\n");
+			printf(CYAN "Voulez vous le trajet le plus rapide(" YELLOW "R" CYAN ") ? Le moins cher(" YELLOW "P" CYAN ") ? " YELLOW "Q" CYAN " pour quitter\n");
 			printf(YELLOW);
 			fscanf(stdin, "%s", ans);
 			if (strcmp(ans, "R") == 0)
