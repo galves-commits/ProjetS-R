@@ -11,6 +11,8 @@
 
 #include "../headers/trains.h"
 #include "../headers/server.h"
+#include "../headers/dialogue.h"
+
 
 #define NBMaxTrain 100
 #define NBMax 1000
@@ -25,7 +27,11 @@ Cellule * traiterFic(char* t)
 	Cellule *trains = malloc(sizeof(Cellule));
 	char str[MaxStr];
 	FILE *file = fopen(t, "r");
-	if (file != NULL)
+	if(file == NULL){
+		printf(RED"ERREUR : fichier invalide\n"DEFAULT);
+		exit(EXIT_SUCCESS);
+	}
+	else
 	{
 		while (fgets(str, NBMax, file) != NULL)
 		{

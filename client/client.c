@@ -47,7 +47,7 @@ int main(int argc, char *argv[], char *arge[])
 	Cellule *trains = malloc(30*sizeof(Cellule));
 	int nbtrains = 0;
 	char *reponse = malloc(128*sizeof(char));
-	sendRequete(&reponse);
+	makeRequete(&reponse);
 	for (int i = 0; i < nbserv; i++)
 	{
 		int nbtrainsserv;

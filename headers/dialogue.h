@@ -1,4 +1,5 @@
 #define PORT 7770
+
 #define DEFAULT "\033[0m"
 #define HIGHLIGHT "\033[1m"
 #define UNDERLINE "\033[4m"
@@ -19,7 +20,7 @@
 #define WHITE "\033[37m"
 
 void reponseRequete(Cellule *, int, int);
-void sendRequete(char **);
+void makeRequete(char **);
 Cellule *getRequete(int, Cellule **, int *);
 void printRequete(int nbserv, Cellule * trains, int nbtrains);
 Cellule * recupTrain(int , int , Cellule **);

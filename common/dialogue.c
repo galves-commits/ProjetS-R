@@ -42,8 +42,8 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 		Train *t = malloc(sizeof(Train));
 		char tampon[MAX];
 
-		char h1[5];
-		char h2[5];
+		char h1[MAX];
+		char h2[MAX];
 		char numero[MAX];
 		char vDep[MAX];
 		char vAr[MAX];
@@ -68,7 +68,7 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 	}
 }
 
-void sendRequete(char **reponse)
+void makeRequete(char **reponse)
 {
 	char hor[MAX];
 	char req[MAX];
@@ -114,7 +114,12 @@ Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 	char tampon[MAX];
 	nbLus = read(connection, tampon, MAX);
 	*nbtrains = atoi(tampon);
-	recupTrain(*nbtrains, connection, trains); //surment la le bug
+	if(*nbtrains==-1){
+		printf(RED"Erreur : protocole invalide\n");
+		exit(EXIT_SUCCESS);
+	}else{
+		recupTrain(*nbtrains, connection, trains);
+	}
 }
 
 void printRequete(int nbserv, Cellule *trains, int nbtrains)
@@ -123,7 +128,7 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 	{
 
 	case 0:
-		printf(CYAN "Il n'y a aucun train qui repond à vos attentes\n");
+		printf(CYAN "Il n'y a aucun train qui repond à vos attentes\n"DEFAULT);
 		break;
 
 	case 1:
@@ -137,7 +142,7 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 		}
 		else
 		{
-			printf(CYAN "Il y a %d trains disponible.\n", nbtrains);
+			printf(CYAN "Il y a %d trains disponible.\n"DEFAULT, nbtrains);
 		}
 
 		if (nbtrains > 1)

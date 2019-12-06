@@ -189,7 +189,7 @@ void afficherTrains(char* message,Cellule *trains,int nbtrains)
 
 	while (i<nbtrains)
 	{
-		printf(PURPLE"Train n° : %d | Départ (%02d:%02d) : %s | Arrivé (%02d:%02d) : %s | Prix : %3.2f€\n",
+		printf(PURPLE"Train n° : %d | Départ (%02d:%02d) : %s | Arrivé (%02d:%02d) : %s | Prix : %3.2f€\n"DEFAULT,
 				t->leTrain.numero, t->leTrain.heureDep.heure, t->leTrain.heureDep.minute,t->leTrain.villeDepart,
                 t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,t->leTrain.villeArrivee,t->leTrain.prix);	
 		t = t->suivant;
