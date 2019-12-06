@@ -41,7 +41,7 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 	{
 		Train *t = malloc(sizeof(Train));
 		char tampon[MAX];
-
+		
 		char h1[5];
 		char h2[5];
 		char numero[MAX];
@@ -55,12 +55,14 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 			   numero, vDep, vAr, h1, h2, prix);
 		t->villeDepart = vDep;
 		t->villeArrivee = vAr;
+
 		t->numero = atoi(numero);
 		t->prix = strtod(prix, &ptr);
 		t->heureArr = stringToTemps(h2);
 		t->heureDep = stringToTemps(h1);
 
 		inserTete(trains, *t);
+		printf("'%s'",t->villeArrivee );
 		free(t);
 	}
 }
@@ -105,6 +107,7 @@ Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 	char tampon[MAX];
 	nbLus = read(connection, tampon, MAX);
 	*nbtrains = atoi(tampon);
+	printf("test getr : '%d'",*nbtrains);
 	recupTrain(*nbtrains, connection, trains); //surment la le bug
 }
 

@@ -36,7 +36,7 @@ void admin(){
 
 CelluleT * statServer(){
     char str[MaxStr];
-    char *s;
+    char *s = malloc(sizeof(char));
     char stat[MaxStr][NBMaxTrain];
     FILE *file = fopen("../server/stat.txt", "r");
     int i = 0;

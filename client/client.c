@@ -40,20 +40,22 @@ int main(int argc, char *argv[], char *arge[])
 	//serv2
 
 	int nbLus;
-	char ans[MAX];
 	admin();
 
-	Cellule * trains = malloc(sizeof(Cellule));
-	int nbtrains;
-	char * reponse = malloc(sizeof(char));
+	Cellule *trains = malloc(sizeof(Cellule));
+	int nbtrains=0;
+	char *reponse = malloc(sizeof(char));
 	sendRequete(&reponse);
+	printf("%s\n", reponse);
+
 	for (int i = 0; i < nbserv; i++)
 	{
-	int nbtrainsserv;	
-	write(connection[i], reponse, strlen(reponse) + 1);
-	getRequete(connection[i],&trains,&nbtrainsserv);
-	nbtrains += nbtrainsserv;
+		int nbtrainsserv;
+		write(connection[i], reponse, strlen(reponse) + 1);
+		getRequete(connection[i], &trains, &nbtrainsserv);
+		nbtrains += nbtrainsserv;
+		printf("'%d'",nbtrains );
 	}
 
-	printRequete(nbserv,trains,nbtrains);
+	printRequete(nbserv, trains, nbtrains);
 }
