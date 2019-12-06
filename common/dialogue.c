@@ -119,7 +119,7 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 	{
 
 	case 0:
-		printf(CYAN "Il n'y a aucun train qui repond à vos attentes");
+		printf(CYAN "Il n'y a aucun train qui repond à vos attentes\n");
 		break;
 
 	case 1:
