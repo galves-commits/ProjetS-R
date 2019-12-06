@@ -17,11 +17,7 @@ int main(int argc, char *argv[], char *arge[])
 	struct sockaddr_in sin;
 	int ecoute;
 	Cellule *trains;
-
-	printf("argc '%d'\n", argc);
-
 	char fichier[MAX];
-	printf("argv[1] '%s'\n", argv[1]);
 	sprintf(fichier, "train%s.txt", argv[1]);
 	printf("Reading '%s'\n", fichier);
 	trains = traiterFic(fichier);

@@ -51,15 +51,18 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 		char *ptr = malloc(sizeof(char));
 
 		int nbLus = read(connection, tampon, MAX);
-		sscanf(tampon, "%[^;\n];%[^;\n];%[^;\n];%[^;\n];%[^;\n];%[^;\n]",
+		printf("read: '%s'",tampon);
+		sscanf(tampon, "%[^;];%[^;];%[^;];%[^;];%[^;];%[^;\n]",
 			   numero, vDep, vAr, h1, h2, prix);
 		t->villeDepart = vDep;
 		t->villeArrivee = vAr;
+		printf("test'%s'",h1);
 
 		t->numero = atoi(numero);
 		t->prix = strtod(prix, &ptr);
 		t->heureArr = stringToTemps(h2);
 		t->heureDep = stringToTemps(h1);
+		printf("'%d'", t->heureDep.minute);
 
 		inserTete(trains, *t);
 	}
@@ -73,7 +76,8 @@ void sendRequete(char **reponse)
 	char arr[MAX];
 	char rep[MAX];
 
-	printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
+	printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" 
+	YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
 	printf(YELLOW);
 	fscanf(stdin, "%s", req);
 	printf(PURPLE "Ville de départ : ");
@@ -133,13 +137,14 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 		}
 		else
 		{
-			printf(CYAN "Il y a %d trains disponible.", nbtrains);
+			printf(CYAN "Il y a %d trains disponible.\n", nbtrains);
 		}
 
 		if (nbtrains > 1)
 		{
 			char ans[MAX];
-			printf(CYAN "Voulez vous le trajet le plus rapide(" YELLOW "R" CYAN ") ? Le moins cher(" YELLOW "P" CYAN ") ? " YELLOW "Q" CYAN " pour quitter\n");
+			printf(CYAN "Voulez vous le trajet le plus rapide(" YELLOW "R" CYAN ") ? Le moins cher(" 
+			YELLOW "P" CYAN ") ? " YELLOW "Q" CYAN " pour quitter\n");
 			printf(YELLOW);
 			fscanf(stdin, "%s", ans);
 			if (strcmp(ans, "R") == 0)

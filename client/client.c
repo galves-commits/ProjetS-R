@@ -44,20 +44,17 @@ int main(int argc, char *argv[], char *arge[])
 	}
 
 	int nbLus;
-	Cellule *trains = malloc(sizeof(Cellule));
+	Cellule *trains = malloc(30*sizeof(Cellule));
 	int nbtrains = 0;
-	char *reponse = malloc(sizeof(char));
+	char *reponse = malloc(128*sizeof(char));
 	sendRequete(&reponse);
-	char rep[MAX];
-	strcpy(rep, reponse);
-	free(reponse);
 	for (int i = 0; i < nbserv; i++)
 	{
 		int nbtrainsserv;
-		write(connection[i], rep, strlen(rep) + 1);
+		write(connection[i], reponse, strlen(reponse) + 1);
 		getRequete(connection[i], &trains, &nbtrainsserv);
 		nbtrains += nbtrainsserv;
 	}
-
+	free(reponse);
 	printRequete(nbserv, trains, nbtrains);
 }
