@@ -29,7 +29,6 @@ int main(int argc, char *argv[], char *arge[])
 
 	for (int i = 0; i < nbserv; i++)
 	{
-		printf("%d\n", i);
 		connection[i] = socket(AF_INET, SOCK_STREAM, 0);
 		sin[i].sin_family = AF_INET;
 		sin[i].sin_port = htons(PORT + serv[i]);
@@ -44,6 +43,17 @@ int main(int argc, char *argv[], char *arge[])
 	char ans[MAX];
 	admin();
 
-	sendRequete(connection, nbserv);
-	getRequete(connection, nbserv);
+	Cellule * trains = malloc(sizeof(Cellule));
+	int nbtrains;
+	char * reponse = malloc(sizeof(char));
+	sendRequete(&reponse);
+	for (int i = 0; i < nbserv; i++)
+	{
+	int nbtrainsserv;	
+	write(connection[i], reponse, strlen(reponse) + 1);
+	getRequete(connection[i],&trains,&nbtrainsserv);
+	nbtrains += nbtrainsserv;
+	}
+
+	printRequete(nbserv,trains,nbtrains);
 }
