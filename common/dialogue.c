@@ -89,6 +89,7 @@ void makeRequete(char **reponse)
 	}
 	printf(PURPLE "Ville de départ : ");
 	printf(DEFAULT);
+
 	setbuf(stdin, NULL);
 	fgets(dep, sizeof(dep), stdin);// on recupere dans dep la ville de depart
 	char *s = strchr(dep, '\n'); //strchr chercher l'occurence de retour a la ligne
