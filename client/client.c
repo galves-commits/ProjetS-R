@@ -14,9 +14,15 @@
 #define MAX 400
 
 int main(int argc, char *argv[], char *arge[])
-{ //serv1
+{
+
 	int nbserv = argc - 1;
 	int serv[nbserv];
+
+	if (nbserv == 1)
+	{
+		admin();
+	}
 
 	for (int i = 1; i < argc; i++)
 	{
@@ -37,24 +43,20 @@ int main(int argc, char *argv[], char *arge[])
 		int echange = connect(connection[i], (struct sockaddr *)&sin[i], sizeof(sin[i]));
 	}
 
-	//serv2
-
 	int nbLus;
-	admin();
-
 	Cellule *trains = malloc(sizeof(Cellule));
-	int nbtrains=0;
+	int nbtrains = 0;
 	char *reponse = malloc(sizeof(char));
 	sendRequete(&reponse);
-	printf("%s\n", reponse);
-
+	char rep[MAX];
+	strcpy(rep, reponse);
+	free(reponse);
 	for (int i = 0; i < nbserv; i++)
 	{
 		int nbtrainsserv;
-		write(connection[i], reponse, strlen(reponse) + 1);
+		write(connection[i], rep, strlen(rep) + 1);
 		getRequete(connection[i], &trains, &nbtrainsserv);
 		nbtrains += nbtrainsserv;
-		printf("'%d'",nbtrains );
 	}
 
 	printRequete(nbserv, trains, nbtrains);
