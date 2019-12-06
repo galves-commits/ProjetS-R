@@ -57,8 +57,7 @@ Cellule * getTHTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
     Cellule *bonTrains = malloc(sizeof(Cellule));
     int i = 0;
     Temps hDebReq = stringToTemps(heure);
-    int nonTrouve = 1;
-    while ((t->suivant != NULL)&&(nonTrouve))
+    while ((t->suivant != NULL))
     {
         if (strcmp(t->leTrain.villeDepart, depart) == 0)
         {
@@ -68,15 +67,16 @@ Cellule * getTHTrains(char *depart, char *arrivee, char* heure ,Cellule *trains,
                 {
                     inserTete(&bonTrains, t->leTrain);
                     i++;
-                    nonTrouve=0;
                 }
             }
         }
         t = t->suivant;
     }
     free(t);
-    *nbtrains = i;
-    return bonTrains;
+    Cellule * retour = malloc(sizeof(Cellule));
+    inserTete(&retour,trierDepart(bonTrains,i));
+    *nbtrains = 1;
+    return retour;
 }
 
 Cellule * getTBTrains(char *depart, char *arrivee, char* heure ,Cellule *trains, int *nbtrains){
@@ -170,6 +170,25 @@ Train trierParTemps(Cellule *trains,int nbtrains)
 	{
 
 		if (inferieur(dureeVoy(t->leTrain), dureeVoy(tMin)))
+		{
+			tMin = t->leTrain;
+		}
+		t = t->suivant;
+        i++;
+	}
+	return tMin;
+}
+
+Train trierDepart(Cellule *trains,int nbtrains)
+{
+	Cellule * minDepart =  malloc(sizeof(Cellule));
+    Train tMin = trains->leTrain;
+	Cellule *t = trains;
+    int i = 0;
+    int dep;
+	while (i< nbtrains)
+	{
+		if (inferieur(t->leTrain.heureDep,tMin.heureDep))
 		{
 			tMin = t->leTrain;
 		}

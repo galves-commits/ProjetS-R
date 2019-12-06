@@ -29,6 +29,7 @@ void inserTete(Cellule** , Train);
 
 Train trierParTemps(Cellule *,int nbtrains);
 Train trierParPrix(Cellule *,int nbtrains);
+Train trierDepart(Cellule *trains,int nbtrains);
 Temps stringToTemps(char*);
 Temps dureeVoy(Train );
 Cellule * getTrains(char *,char* , char* , char* , Cellule*,int* );
