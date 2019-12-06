@@ -23,7 +23,7 @@ void admin(){
 	printf(YELLOW);
 	fscanf( stdin, "%s", reponse);  //reponse stocke la reponse du terminal
 	while(strcmp(reponse, "A")&&strcmp(reponse, "C")){ // si on se trompe
-		printf("Veuillez rentrer un caractère correcte\n");
+		printf(RED"Veuillez rentrer un caractère correcte\n");
 		printf(PURPLE"Accès Administration("YELLOW"A"PURPLE") ou Client("YELLOW"C"PURPLE") ?\n");
 		printf(YELLOW);
 		fscanf( stdin, "%s", reponse);
@@ -201,39 +201,39 @@ void comparaison(CelluleT *stat)
 	char a='%';
 		printf(GREEN"Nous avons reçus aujourd'hui %d requêtes\n",nbedeReq);
 		if (m == nbeTV) {
-			printf(GREEN"Le protocole TV est le plus utilisé avec %d requete soit une moyenne de %0.3f %c \n" , nbeTV , moyP,a) ;
+			printf(GREEN"Le protocole TV est le plus utilisé avec %d requête soit une moyenne de %0.3f %c \n" , nbeTV , moyP,a) ;
 		}
 		if (m == nbeTH) {
-			printf(GREEN"Le protocole TH est le plus utilisé avec %d requete soit une moyenne de %0.3f %c \n" , nbeTH , moyP,a);
+			printf(GREEN"Le protocole TH est le plus utilisé avec %d requêtes soit une moyenne de %0.3f %c \n" , nbeTH , moyP,a);
 		}
 		if (m == nbeTB) {
-			printf(GREEN"Le protocole TB est le plus utilisé avec %d requete soit une moyenne de %0.3f %c \n" , nbeTB , moyP,a) ;
+			printf(GREEN"Le protocole TB est le plus utilisé avec %d requêtes soit une moyenne de %0.3f %c \n" , nbeTB , moyP,a) ;
 		}
 		if (tr == nbeVG) {
-			printf(GREEN"Le trajet le plus recherché est Valence --> Grenoble avec %d requete soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
+			printf(GREEN"Le trajet le plus recherché est Valence --> Grenoble avec %d requêtes soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
 		}
 		if (tr == nbeVM) {
-			printf(GREEN"Le trajet le plus recherché est Valence --> Montelimar avec %d requete soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
+			printf(GREEN"Le trajet le plus recherché est Valence --> Montelimar avec %d requêtes soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
 		}
 		if (tr == nbeVP) {
-			printf(GREEN"Le trajet le plus recherché est Valence --> Paris Gare de Lyon avec %d requete soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
+			printf(GREEN"Le trajet le plus recherché est Valence --> Paris Gare de Lyon avec %d requêtes soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
 		}
 		if (tr == nbeGV) {
-			printf(GREEN"Le trajet le plus recherché est Grenoble --> Valence avec %d requete soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
+			printf(GREEN"Le trajet le plus recherché est Grenoble --> Valence avec %d requêtes soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
 		}
 		if (tr == nbeMV) {
-			printf(GREEN"Le trajet le plus recherché est Montelimar --> Valence avec %d requete soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
+			printf(GREEN"Le trajet le plus recherché est Montelimar --> Valence avec %d requêtes soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
 		}
 		if (tr == nbePV) {
-			printf(GREEN"Le trajet le plus recherché est Paris Gare de Lyon --> Valence avec %d requete soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
+			printf(GREEN"Le trajet le plus recherché est Paris Gare de Lyon --> Valence avec %d requêtes soit une moyenne de %0.3f %c \n" , tr ,  moyT,a) ;
 		}
 		if (matin==soir){
 			printf(YELLOW"Il y a autant de requêtes le matin que l'après-midi\n");
 		}else{
 			if (h==matin){
-				printf(YELLOW"La majorité des requêtes sont faites le matin\n");
+				printf(YELLOW"La majorité des requêtes sont faites le matin (%d requêtes) \n",h);
 			}else{
-				printf(YELLOW"La majorité des requêtes sont faites l'après-midi\n");
+				printf(YELLOW"La majorité des requêtes sont faites l'après-midi (%d requêtes)\n",h);
 		}
 	}
 }

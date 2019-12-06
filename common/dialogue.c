@@ -31,7 +31,6 @@ void reponseRequete(Cellule *trains, int echange, int nbtrains)
 				trains->leTrain.heureArr.heure, trains->leTrain.heureArr.minute,
 				prixReduc);
 		trains = trains->suivant;
-		printf("%s\n", chaine);
 		write(echange, chaine, sizeof(chaine));
 	}
 }
@@ -81,10 +80,10 @@ void makeRequete(char **reponse)
 	printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
 	printf(YELLOW);
 	fscanf(stdin, "%s", req);
-	while ((strcmp(req, "TV") != 0) && (strcmp(req, "TH") != 0) && (strcmp(req, "TH") != 0))
+	while ((strcmp(req, "TV") != 0) && (strcmp(req, "TH") != 0) && (strcmp(req, "TB") != 0))
 	{
-		printf("Veuillez écrire un protocol correct\n");
-		printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
+		printf(RED "Veuillez écrire un protocol correct\n");
+		printf(PURPLE "Recherche avec villes seuls(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
 		printf(YELLOW);
 		fscanf(stdin, "%s", req);
 	}
@@ -128,7 +127,7 @@ void makeRequete(char **reponse)
 	if (strcmp(arr, dep) == 0)
 	{
 
-		printf("Vous avez indiqué la même ville de départ de d'arrivé veuillez recommencer");
+		printf(RED "Vous avez indiqué la même ville de départ et d'arrivé veuillez recommencer\n" DEFAULT);
 		exit(EXIT_SUCCESS);
 	}
 	if (strcmp(req, "TV") == 0)
@@ -160,7 +159,7 @@ Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 	int nbLus;
 	int nbtrainsAdd = 0;
 	char tampon[MAX];
-	//recuperation du nombre de trians
+	//recuperation du nombre de trains
 	nbLus = read(connection, tampon, MAX);
 	*nbtrains = atoi(tampon);
 
@@ -206,6 +205,14 @@ void printRequete(int nbserv, Cellule *trains, int nbtrains)
 			printf(CYAN "Voulez vous le trajet le plus rapide(" YELLOW "R" CYAN ") ? Le moins cher(" YELLOW "P" CYAN ") ? " YELLOW "Q" CYAN " pour quitter\n");
 			printf(YELLOW);
 			fscanf(stdin, "%s", ans);
+			while ((strcmp(ans, "R") != 0) && (strcmp(ans, "P") != 0) && (strcmp(ans, "Q") != 0))
+			{
+				printf(RED "Veuillez rentrer un caractère correcte\n");
+				printf(CYAN "Voulez vous le trajet le plus rapide(" YELLOW "R" CYAN ") ? Le moins cher(" YELLOW "P" CYAN ") ? " YELLOW "Q" CYAN " pour quitter\n");
+				printf(YELLOW);
+				fscanf(stdin, "%s", ans);
+			}
+
 			if (strcmp(ans, "R") == 0)
 			{
 				Cellule *tMin = malloc(sizeof(Cellule));
