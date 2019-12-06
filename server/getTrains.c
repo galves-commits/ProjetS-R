@@ -14,7 +14,7 @@
 #include "../headers/dialogue.h"
 Cellule * getTrains(char* protocol, char *depart, char *arrivee, char *heure, Cellule *trains, int* nbtrains)
 {
-    printf("Requete : %s : %s : %s\n",protocol, depart, arrivee);
+ printf("Requete : %s : %s : %s\n",protocol, depart, arrivee);
     FILE *fil = fopen("stat.txt", "a");
     fprintf(fil, "%s-%s-%s-%s\n",protocol, depart, arrivee,heure);
     fclose(fil);

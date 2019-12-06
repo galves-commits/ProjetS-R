@@ -80,12 +80,35 @@ void sendRequete(char **reponse)
 	YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
 	printf(YELLOW);
 	fscanf(stdin, "%s", req);
+	while ((strcmp(req, "TV") != 0)&&(strcmp(req, "TH") != 0)&&(strcmp(req, "TH") != 0)){
+		printf("Veuillez écrire un protocol correct\n");
+		printf(PURPLE "Recherche avec ville seul(" YELLOW "TV" PURPLE "), avec une horraire (" YELLOW "TH" PURPLE "), avec deux horraires(" YELLOW "TB" PURPLE ") ? ");
+		printf(YELLOW);
+		fscanf(stdin, "%s", req);
+	}
 	printf(PURPLE "Ville de départ : ");
 	printf(DEFAULT);
 	fscanf(stdin, "%s;", dep);
+	while ((strcmp(dep, "Valence") != 0)&&(strcmp(req, "Grenoble") != 0)&&(strcmp(req, "Montelimar") != 0)&&(strcmp(req, "Paris Gare de Lyon") != 0)){
+		printf("Veuillez vérifier l'orthographe, nous ne prenons pas ne charge cette ville\n");
+		printf(PURPLE "Ville de départ : ");
+		printf(DEFAULT);
+		fscanf(stdin, "%s;", dep);
+	}
 	printf(PURPLE "Ville d'arrivé : ");
 	printf(DEFAULT);
 	fscanf(stdin, "%s", arr);
+	while ((strcmp(arr, "Valence") != 0)&&(strcmp(arr, "Grenoble") != 0)&&(strcmp(arr, "Montelimar") != 0)&&(strcmp(arr, "Paris Gare de Lyon") != 0)){
+		printf("Veuillez vérifier l'orthographe, nous ne prenons pas ne charge cette ville\n");
+		printf(PURPLE "Ville d'arrivé : ");
+		printf(DEFAULT);
+		fscanf(stdin, "%s;", arr);
+	}
+	if (strcmp(arr,dep) == 0){
+	
+		printf("Vous avez indiqué la même ville de départ de d'arrivé veuillez recommencer");
+		exit(EXIT_SUCCESS);
+	}
 	if (strcmp(req, "TV") == 0)
 	{
 		sprintf(*reponse, "%s;%s;%s\n", req, dep, arr);
