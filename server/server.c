@@ -85,6 +85,6 @@ void requeteTrajet(int echange, Cellule *trains)
 		reponseRequete(goodTrains, echange, nbtrains);
 	}else{
 		//envoie d'un marqueur d'erreur
-		write(echange,"-1",3);
+		write(echange,"-1",sizeof("-1"));
 	}
 }
