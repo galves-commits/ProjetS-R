@@ -14,25 +14,26 @@
 #define MAX 400
 
 int main(int argc, char *argv[], char *arge[])
-{
-
+{	
 	int nbserv = argc - 1;
-	int serv[nbserv];
 
+	// demande admin si seulement 1 serveur
 	if (nbserv == 1)
 	{
 		admin();
 	}
 
+	//recuperation des numeros de serveur auxquels se connecter 
+	int serv[nbserv];
 	for (int i = 1; i < argc; i++)
 	{
 		serv[i - 1] = atoi(argv[i]);
 	}
 
+	//Configuration des ports et connection aux serveurs
 	int connection[nbserv];
 	struct sockaddr_in sin[nbserv];
 	struct hostent *host[nbserv];
-
 	for (int i = 0; i < nbserv; i++)
 	{
 		connection[i] = socket(AF_INET, SOCK_STREAM, 0);
@@ -47,14 +48,22 @@ int main(int argc, char *argv[], char *arge[])
 	Cellule *trains = malloc(30*sizeof(Cellule));
 	int nbtrains = 0;
 	char *reponse = malloc(128*sizeof(char));
+
+	//demande des parametres de la requete qui seront ecris dans "reponse"
 	makeRequete(&reponse);
+
+	//traitement de la requete avec les serveurs
 	for (int i = 0; i < nbserv; i++)
 	{
 		int nbtrainsserv;
+		//envoi de la requete au serveur i
 		write(connection[i], reponse, strlen(reponse) + 1);
+		//recuperation des resultats de la requete dans "trains"
 		getRequete(connection[i], &trains, &nbtrainsserv);
 		nbtrains += nbtrainsserv;
 	}
 	free(reponse);
+
+	//affichage des resultats
 	printRequete(nbserv, trains, nbtrains);
 }

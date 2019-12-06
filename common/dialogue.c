@@ -14,9 +14,12 @@
 
 void reponseRequete(Cellule *trains, int echange, int nbtrains)
 {
+	//envois d'un paquet contenant le nombre de trains
 	char reponse[10];
 	sprintf(reponse, "%d\n", nbtrains);
 	write(echange, reponse, sizeof(reponse));
+
+	//envois des resultats de la requete un à un
 	while (trains->suivant != NULL)
 	{
 		char chaine[MAX];
@@ -37,11 +40,11 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 {
 	int i = 0;
 
+	//On passe dans la boucle autant de fois qu'il y a de trains
 	for (int i = 0; i < nbTrains; i++)
 	{
 		Train *t = malloc(sizeof(Train));
 		char tampon[MAX];
-
 		char h1[MAX];
 		char h2[MAX];
 		char numero[MAX];
@@ -50,20 +53,19 @@ Cellule *recupTrain(int nbTrains, int connection, Cellule **trains)
 		char prix[MAX];
 		char *ptr = malloc(sizeof(char));
 
+		//recuperation du paquet et decomposition du trains
 		int nbLus = read(connection, tampon, MAX);
-		printf("read: '%s'",tampon);
 		sscanf(tampon, "%[^;];%[^;];%[^;];%[^;];%[^;];%[^;\n]",
 			   numero, vDep, vAr, h1, h2, prix);
+		//contruction de la structure train
 		t->villeDepart = vDep;
 		t->villeArrivee = vAr;
-		printf("test'%s'",h1);
-
 		t->numero = atoi(numero);
 		t->prix = strtod(prix, &ptr);
 		t->heureArr = stringToTemps(h2);
 		t->heureDep = stringToTemps(h1);
-		printf("'%d'", t->heureDep.minute);
 
+		//insertion du train dans la chaine
 		inserTete(trains, *t);
 	}
 }
@@ -133,14 +135,17 @@ Cellule *getRequete(int connection, Cellule **trains, int *nbtrains)
 {
 	int nbLus;
 	int nbtrainsAdd = 0;
-
 	char tampon[MAX];
+	//recuperation du nombre de trians
 	nbLus = read(connection, tampon, MAX);
 	*nbtrains = atoi(tampon);
+
+	//cas ou le mauvais protocole a été selectionné
 	if(*nbtrains==-1){
 		printf(RED"Erreur : protocole invalide\n");
 		exit(EXIT_SUCCESS);
 	}else{
+		//recuperation des trains
 		recupTrain(*nbtrains, connection, trains);
 	}
 }
