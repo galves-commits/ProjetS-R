@@ -14,17 +14,27 @@
 
 int main(int argc, char *argv[], char *arge[])
 {
-	Cellule *trains = traiterFic("train.txt");
-	printf("Runing\n");
-
-	int ecoute = socket(AF_INET, SOCK_STREAM, 0);
 	struct sockaddr_in sin;
+	int ecoute;
+	Cellule *trains;
+
+	printf("argc '%d'\n", argc);
+
+	char fichier[MAX];
+	printf("argv[1] '%s'\n", argv[1]);
+	sprintf(fichier, "train%s.txt", argv[1]);
+	printf("Reading '%s'\n", fichier);
+	trains = traiterFic(fichier);
+	printf("Runing\n");
+	ecoute = socket(AF_INET, SOCK_STREAM, 0);
 	sin.sin_family = AF_INET;
-	sin.sin_port = htons(7777);
+	int port = PORT + atoi(argv[1]);
+	sin.sin_port = htons(port);
+
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	bind(ecoute, (struct sockaddr *)&sin, sizeof(sin));
 	listen(ecoute, 5);
-	
+
 	while (true)
 	{
 		int echange = accept(ecoute, NULL, NULL);
@@ -43,7 +53,6 @@ int main(int argc, char *argv[], char *arge[])
 		}
 	}
 }
-
 
 void requeteTrajet(int echange, Cellule *trains)
 {
@@ -81,5 +90,3 @@ void requeteTrajet(int echange, Cellule *trains)
 		}
 	}
 }
-
-

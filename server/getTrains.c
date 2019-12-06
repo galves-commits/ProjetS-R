@@ -189,7 +189,7 @@ void afficherTrains(char* message,Cellule *trains,int nbtrains)
 
 	while (i<nbtrains)
 	{
-		printf("%d %20s  %20s \t %02d:%02d \t\t  %02d:%02d \t %3.2f€\n",
+		printf("%d;%20s;%20s;%02d:%02d;%02d:%02d;%3.2f€\n",
 				t->leTrain.numero, t->leTrain.villeDepart, t->leTrain.villeArrivee,
 				t->leTrain.heureDep.heure, t->leTrain.heureDep.minute,
 				t->leTrain.heureArr.heure, t->leTrain.heureArr.minute,
@@ -199,3 +199,4 @@ void afficherTrains(char* message,Cellule *trains,int nbtrains)
 	}
     free(t);
 }
+
